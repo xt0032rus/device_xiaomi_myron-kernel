@@ -11,8 +11,8 @@
  * ftp://www.kernel.org/pub/linux/libs/security/linux-privs/kernel-2.6/
  */
 
-#ifndef _UAPI_LINUX_CAPABILITY_H
-#define _UAPI_LINUX_CAPABILITY_H
+#ifndef _LINUX_CAPABILITY_H
+#define _LINUX_CAPABILITY_H
 
 #include <linux/types.h>
 
@@ -39,14 +39,14 @@
 typedef struct __user_cap_header_struct {
 	__u32 version;
 	int pid;
-} __user *cap_user_header_t;
+} *cap_user_header_t;
 
 struct __user_cap_data_struct {
         __u32 effective;
         __u32 permitted;
         __u32 inheritable;
 };
-typedef struct __user_cap_data_struct __user *cap_user_data_t;
+typedef struct __user_cap_data_struct *cap_user_data_t;
 
 
 #define VFS_CAP_REVISION_MASK	0xFF000000
@@ -90,7 +90,6 @@ struct vfs_ns_cap_data {
 	__le32 rootid;
 };
 
-#ifndef __KERNEL__
 
 /*
  * Backwardly compatible definition for source code - trapped in a
@@ -100,7 +99,6 @@ struct vfs_ns_cap_data {
 #define _LINUX_CAPABILITY_VERSION  _LINUX_CAPABILITY_VERSION_1
 #define _LINUX_CAPABILITY_U32S     _LINUX_CAPABILITY_U32S_1
 
-#endif
 
 
 /**
@@ -430,4 +428,4 @@ struct vfs_ns_cap_data {
 #define CAP_TO_MASK(x)      (1U << ((x) & 31)) /* mask for indexed __u32 */
 
 
-#endif /* _UAPI_LINUX_CAPABILITY_H */
+#endif /* _LINUX_CAPABILITY_H */

@@ -1,6 +1,6 @@
 /* SPDX-License-Identifier: GPL-2.0 WITH Linux-syscall-note */
-#ifndef _UAPI__LINUX_MROUTE_H
-#define _UAPI__LINUX_MROUTE_H
+#ifndef __LINUX_MROUTE_H
+#define __LINUX_MROUTE_H
 
 #include <linux/sockios.h>
 #include <linux/types.h>
@@ -184,4 +184,4 @@ enum {
 #define IGMPMSG_WHOLEPKT	3		/* For PIM Register processing */
 #define IGMPMSG_WRVIFWHOLE	4		/* For PIM Register and assert processing */
 
-#endif /* _UAPI__LINUX_MROUTE_H */
+#endif /* __LINUX_MROUTE_H */

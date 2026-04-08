@@ -17,8 +17,8 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-#ifndef _UAPI__ASM_PTRACE_H
-#define _UAPI__ASM_PTRACE_H
+#ifndef __ASM_PTRACE_H
+#define __ASM_PTRACE_H
 
 #include <linux/types.h>
 
@@ -326,4 +326,4 @@ struct user_za_header {
 
 #endif /* __ASSEMBLY__ */
 
-#endif /* _UAPI__ASM_PTRACE_H */
+#endif /* __ASM_PTRACE_H */

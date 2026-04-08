@@ -37,7 +37,9 @@
 #include <asm/ptrace.h>
 #include <asm/sve_context.h>
 
+#define __KVM_HAVE_GUEST_DEBUG
 #define __KVM_HAVE_IRQ_LINE
+#define __KVM_HAVE_READONLY_MEM
 #define __KVM_HAVE_VCPU_EVENTS
 
 #define KVM_COALESCED_MMIO_PAGE_OFFSET 1
@@ -74,11 +76,11 @@ struct kvm_regs {
 
 /* KVM_ARM_SET_DEVICE_ADDR ioctl id encoding */
 #define KVM_ARM_DEVICE_TYPE_SHIFT	0
-#define KVM_ARM_DEVICE_TYPE_MASK	__GENMASK(KVM_ARM_DEVICE_TYPE_SHIFT + 15, \
-						  KVM_ARM_DEVICE_TYPE_SHIFT)
+#define KVM_ARM_DEVICE_TYPE_MASK	GENMASK(KVM_ARM_DEVICE_TYPE_SHIFT + 15, \
+						KVM_ARM_DEVICE_TYPE_SHIFT)
 #define KVM_ARM_DEVICE_ID_SHIFT		16
-#define KVM_ARM_DEVICE_ID_MASK		__GENMASK(KVM_ARM_DEVICE_ID_SHIFT + 15, \
-						  KVM_ARM_DEVICE_ID_SHIFT)
+#define KVM_ARM_DEVICE_ID_MASK		GENMASK(KVM_ARM_DEVICE_ID_SHIFT + 15, \
+						KVM_ARM_DEVICE_ID_SHIFT)
 
 /* Supported device IDs */
 #define KVM_ARM_DEVICE_VGIC_V2		0
@@ -160,11 +162,6 @@ struct kvm_sync_regs {
 	__u64 device_irq_level;
 };
 
-/* Bits for run->s.regs.device_irq_level */
-#define KVM_ARM_DEV_EL1_VTIMER		(1 << 0)
-#define KVM_ARM_DEV_EL1_PTIMER		(1 << 1)
-#define KVM_ARM_DEV_PMU			(1 << 2)
-
 /*
  * PMU filter structure. Describe a range of events with a particular
  * action. To be used with KVM_ARM_VCPU_PMU_V3_FILTER.
@@ -196,7 +193,7 @@ struct kvm_vcpu_events {
 struct kvm_arm_copy_mte_tags {
 	__u64 guest_ipa;
 	__u64 length;
-	void __user *addr;
+	void *addr;
 	__u64 flags;
 	__u64 reserved[2];
 };
@@ -360,18 +357,12 @@ struct kvm_arm_counter_offset {
 
 enum {
 	KVM_REG_ARM_STD_BIT_TRNG_V1_0	= 0,
-#ifdef __KERNEL__
-	KVM_REG_ARM_STD_BMAP_BIT_COUNT,
-#endif
 };
 
 #define KVM_REG_ARM_STD_HYP_BMAP		KVM_REG_ARM_FW_FEAT_BMAP_REG(1)
 
 enum {
 	KVM_REG_ARM_STD_HYP_BIT_PV_TIME	= 0,
-#ifdef __KERNEL__
-	KVM_REG_ARM_STD_HYP_BMAP_BIT_COUNT,
-#endif
 };
 
 #define KVM_REG_ARM_VENDOR_HYP_BMAP		KVM_REG_ARM_FW_FEAT_BMAP_REG(2)
@@ -379,9 +370,6 @@ enum {
 enum {
 	KVM_REG_ARM_VENDOR_HYP_BIT_FUNC_FEAT	= 0,
 	KVM_REG_ARM_VENDOR_HYP_BIT_PTP		= 1,
-#ifdef __KERNEL__
-	KVM_REG_ARM_VENDOR_HYP_BMAP_BIT_COUNT,
-#endif
 };
 
 /* Device Control API on vm fd */
@@ -456,9 +444,7 @@ enum {
  * and only here to provide source code level compatibility with older
  * userland. The highest SPI number can be set via KVM_DEV_ARM_VGIC_GRP_NR_IRQS.
  */
-#ifndef __KERNEL__
 #define KVM_ARM_IRQ_GIC_MAX		127
-#endif
 
 /* One single KVM irqchip, ie. the VGIC */
 #define KVM_NR_IRQCHIPS          1
@@ -477,6 +463,15 @@ enum {
 #define KVM_PSCI_RET_INVAL		PSCI_RET_INVALID_PARAMS
 #define KVM_PSCI_RET_DENIED		PSCI_RET_DENIED
 
+/* Protected KVM */
+#define KVM_CAP_ARM_PROTECTED_VM_FLAGS_SET_FW_IPA	0
+#define KVM_CAP_ARM_PROTECTED_VM_FLAGS_INFO		1
+
+struct kvm_protected_vm_info {
+	__u64 firmware_size;
+	__u64 __reserved[7];
+};
+
 /* arm64-specific kvm_run::system_event flags */
 /*
  * Reset caused by a PSCI v1.1 SYSTEM_RESET2 call.
@@ -492,9 +487,6 @@ enum kvm_smccc_filter_action {
 	KVM_SMCCC_FILTER_DENY,
 	KVM_SMCCC_FILTER_FWD_TO_USER,
 
-#ifdef __KERNEL__
-	NR_SMCCC_FILTER_ACTIONS
-#endif
 };
 
 struct kvm_smccc_filter {
@@ -507,38 +499,6 @@ struct kvm_smccc_filter {
 /* arm64-specific KVM_EXIT_HYPERCALL flags */
 #define KVM_HYPERCALL_EXIT_SMC		(1U << 0)
 #define KVM_HYPERCALL_EXIT_16BIT	(1U << 1)
-
-/*
- * Get feature ID registers userspace writable mask.
- *
- * From DDI0487J.a, D19.2.66 ("ID_AA64MMFR2_EL1, AArch64 Memory Model
- * Feature Register 2"):
- *
- * "The Feature ID space is defined as the System register space in
- * AArch64 with op0==3, op1=={0, 1, 3}, CRn==0, CRm=={0-7},
- * op2=={0-7}."
- *
- * This covers all currently known R/O registers that indicate
- * anything useful feature wise, including the ID registers.
- *
- * If we ever need to introduce a new range, it will be described as
- * such in the range field.
- */
-#define KVM_ARM_FEATURE_ID_RANGE_IDX(op0, op1, crn, crm, op2)		\
-	({								\
-		__u64 __op1 = (op1) & 3;				\
-		__op1 -= (__op1 == 3);					\
-		(__op1 << 6 | ((crm) & 7) << 3 | (op2));		\
-	})
-
-#define KVM_ARM_FEATURE_ID_RANGE	0
-#define KVM_ARM_FEATURE_ID_RANGE_SIZE	(3 * 8 * 8)
-
-struct reg_mask_range {
-	__u64 addr;		/* Pointer to mask array */
-	__u32 range;		/* Requested range */
-	__u32 reserved[13];
-};
 
 #endif
 

@@ -11,8 +11,8 @@
  *   Xiao Guangrong <guangrong.xiao@linux.intel.com>
  */
 
-#ifndef _UAPI_LINUX_FPGA_DFL_H
-#define _UAPI_LINUX_FPGA_DFL_H
+#ifndef _LINUX_FPGA_DFL_H
+#define _LINUX_FPGA_DFL_H
 
 #include <linux/types.h>
 #include <linux/ioctl.h>
@@ -276,4 +276,4 @@ struct dfl_fpga_fme_port_pr {
 					     DFL_FME_BASE + 4,	\
 					     struct dfl_fpga_irq_set)
 
-#endif /* _UAPI_LINUX_FPGA_DFL_H */
+#endif /* _LINUX_FPGA_DFL_H */

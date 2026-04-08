@@ -11,8 +11,8 @@
  * this program; if not, write to the Free Software Foundation, Inc.,
  * 51 Franklin St - Fifth Floor, Boston, MA 02110-1301 USA.
  */
-#ifndef _UAPI_HIDRAW_H
-#define _UAPI_HIDRAW_H
+#ifndef _HIDRAW_H
+#define _HIDRAW_H
 
 
 
@@ -46,7 +46,6 @@ struct hidraw_devinfo {
 /* The first byte of SOUTPUT and GOUTPUT is the report number */
 #define HIDIOCSOUTPUT(len)    _IOC(_IOC_WRITE|_IOC_READ, 'H', 0x0B, len)
 #define HIDIOCGOUTPUT(len)    _IOC(_IOC_WRITE|_IOC_READ, 'H', 0x0C, len)
-#define HIDIOCREVOKE	      _IOW('H', 0x0D, int) /* Revoke device access */
 
 #define HIDRAW_FIRST_MINOR 0
 #define HIDRAW_MAX_DEVICES 64
@@ -56,4 +55,4 @@ struct hidraw_devinfo {
 
 /* kernel-only API declarations */
 
-#endif /* _UAPI_HIDRAW_H */
+#endif /* _HIDRAW_H */

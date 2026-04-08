@@ -34,8 +34,8 @@
  *  SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifndef _UAPINFS_IDMAP_H
-#define _UAPINFS_IDMAP_H
+#ifndef NFS_IDMAP_H
+#define NFS_IDMAP_H
 
 #include <linux/types.h>
 
@@ -62,4 +62,4 @@ struct idmap_msg {
 };
 
 
-#endif /* _UAPINFS_IDMAP_H */
+#endif /* NFS_IDMAP_H */

@@ -115,13 +115,11 @@ enum v4l2_colorfx {
 
 /* USER-class private control IDs */
 
-#ifndef __KERNEL__
 /*
  * The base for the meye driver controls. This driver was removed, but
  * we keep this define in case any software still uses it.
  */
 #define V4L2_CID_USER_MEYE_BASE			(V4L2_CID_USER_BASE + 0x1000)
-#endif
 
 /* The base for the bttv driver controls.
  * We reserve 32 controls for this driver. */
@@ -202,18 +200,6 @@ enum v4l2_colorfx {
  * We reserve 16 controls for this driver.
  */
 #define V4L2_CID_USER_ASPEED_BASE		(V4L2_CID_USER_BASE + 0x11a0)
-
-/*
- * The base for Nuvoton NPCM driver controls.
- * We reserve 16 controls for this driver.
- */
-#define V4L2_CID_USER_NPCM_BASE			(V4L2_CID_USER_BASE + 0x11b0)
-
-/*
- * The base for THine THP7312 driver controls.
- * We reserve 32 controls for this driver.
- */
-#define V4L2_CID_USER_THP7312_BASE		(V4L2_CID_USER_BASE + 0x11c0)
 
 /* MPEG-class control IDs */
 /* The MPEG controls are applicable to all codec controls
@@ -418,11 +404,9 @@ enum v4l2_mpeg_video_multi_slice_mode {
 	V4L2_MPEG_VIDEO_MULTI_SLICE_MODE_SINGLE		= 0,
 	V4L2_MPEG_VIDEO_MULTI_SLICE_MODE_MAX_MB		= 1,
 	V4L2_MPEG_VIDEO_MULTI_SLICE_MODE_MAX_BYTES	= 2,
-#ifndef __KERNEL__
 	/* Kept for backwards compatibility reasons. Stupid typo... */
 	V4L2_MPEG_VIDEO_MULTI_SICE_MODE_MAX_MB		= 1,
 	V4L2_MPEG_VIDEO_MULTI_SICE_MODE_MAX_BYTES	= 2,
-#endif
 };
 #define V4L2_CID_MPEG_VIDEO_VBV_SIZE			(V4L2_CID_CODEC_BASE+222)
 #define V4L2_CID_MPEG_VIDEO_DEC_PTS			(V4L2_CID_CODEC_BASE+223)
@@ -3494,12 +3478,10 @@ struct v4l2_ctrl_av1_film_grain {
 };
 
 /* MPEG-compression definitions kept for backwards compatibility */
-#ifndef __KERNEL__
 #define V4L2_CTRL_CLASS_MPEG            V4L2_CTRL_CLASS_CODEC
 #define V4L2_CID_MPEG_CLASS             V4L2_CID_CODEC_CLASS
 #define V4L2_CID_MPEG_BASE              V4L2_CID_CODEC_BASE
 #define V4L2_CID_MPEG_CX2341X_BASE      V4L2_CID_CODEC_CX2341X_BASE
 #define V4L2_CID_MPEG_MFC51_BASE        V4L2_CID_CODEC_MFC51_BASE
-#endif
 
 #endif

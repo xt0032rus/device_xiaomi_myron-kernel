@@ -9,8 +9,8 @@
  * Copyright (C) 1999 Hewlett-Packard Co.
  * Copyright (C) 1999 Stephane Eranian <eranian@hpl.hp.com>
  */
-#ifndef _UAPI_LINUX_RTC_H_
-#define _UAPI_LINUX_RTC_H_
+#ifndef _LINUX_RTC_H_
+#define _LINUX_RTC_H_
 
 #include <linux/const.h>
 #include <linux/ioctl.h>
@@ -149,4 +149,4 @@ struct rtc_param {
 #define RTC_MAX_FREQ	8192
 
 
-#endif /* _UAPI_LINUX_RTC_H_ */
+#endif /* _LINUX_RTC_H_ */

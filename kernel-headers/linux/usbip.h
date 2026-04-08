@@ -5,8 +5,8 @@
  *	USBIP uapi defines and function prototypes etc.
 */
 
-#ifndef _UAPI_LINUX_USBIP_H
-#define _UAPI_LINUX_USBIP_H
+#ifndef _LINUX_USBIP_H
+#define _LINUX_USBIP_H
 
 /* usbip device status - exported in usbip device sysfs status */
 enum usbip_device_status {
@@ -50,4 +50,4 @@ enum usbip_device_status {
 #define USBIP_URB_DMA_SG_COMBINED	0x00400000
 #define USBIP_URB_ALIGNED_TEMP_BUFFER	0x00800000
 
-#endif /* _UAPI_LINUX_USBIP_H */
+#endif /* _LINUX_USBIP_H */

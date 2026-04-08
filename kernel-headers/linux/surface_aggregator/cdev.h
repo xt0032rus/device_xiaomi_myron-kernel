@@ -9,8 +9,8 @@
  * Copyright (C) 2020-2021 Maximilian Luz <luzmaximilian@gmail.com>
  */
 
-#ifndef _UAPI_LINUX_SURFACE_AGGREGATOR_CDEV_H
-#define _UAPI_LINUX_SURFACE_AGGREGATOR_CDEV_H
+#ifndef _LINUX_SURFACE_AGGREGATOR_CDEV_H
+#define _LINUX_SURFACE_AGGREGATOR_CDEV_H
 
 #include <linux/ioctl.h>
 #include <linux/types.h>
@@ -144,4 +144,4 @@ struct ssam_cdev_event {
 #define SSAM_CDEV_EVENT_ENABLE		_IOW(0xA5, 4, struct ssam_cdev_event_desc)
 #define SSAM_CDEV_EVENT_DISABLE		_IOW(0xA5, 5, struct ssam_cdev_event_desc)
 
-#endif /* _UAPI_LINUX_SURFACE_AGGREGATOR_CDEV_H */
+#endif /* _LINUX_SURFACE_AGGREGATOR_CDEV_H */

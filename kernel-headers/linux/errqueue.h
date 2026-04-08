@@ -1,6 +1,6 @@
 /* SPDX-License-Identifier: GPL-2.0 WITH Linux-syscall-note */
-#ifndef _UAPI_LINUX_ERRQUEUE_H
-#define _UAPI_LINUX_ERRQUEUE_H
+#ifndef _LINUX_ERRQUEUE_H
+#define _LINUX_ERRQUEUE_H
 
 #include <linux/types.h>
 #include <linux/time_types.h>
@@ -54,11 +54,7 @@ struct sock_extended_err {
  *	require two structure definitions to provide both.
  */
 struct scm_timestamping {
-#ifdef __KERNEL__
-	struct __kernel_old_timespec ts[3];
-#else
 	struct timespec ts[3];
-#endif
 };
 
 struct scm_timestamping64 {
@@ -75,4 +71,4 @@ enum {
 	SCM_TSTAMP_ACK,		/* data acknowledged by peer */
 };
 
-#endif /* _UAPI_LINUX_ERRQUEUE_H */
+#endif /* _LINUX_ERRQUEUE_H */

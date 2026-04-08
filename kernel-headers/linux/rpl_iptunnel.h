@@ -6,8 +6,8 @@
  *  (C) 2020 Alexander Aring <alex.aring@gmail.com>
  */
 
-#ifndef _UAPI_LINUX_RPL_IPTUNNEL_H
-#define _UAPI_LINUX_RPL_IPTUNNEL_H
+#ifndef _LINUX_RPL_IPTUNNEL_H
+#define _LINUX_RPL_IPTUNNEL_H
 
 enum {
 	RPL_IPTUNNEL_UNSPEC,

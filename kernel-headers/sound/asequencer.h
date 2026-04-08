@@ -4,13 +4,13 @@
  *  Copyright (c) 1998-1999 by Frank van de Pol <fvdpol@coil.demon.nl>
  *            (c) 1998-1999 by Jaroslav Kysela <perex@perex.cz>
  */
-#ifndef _UAPI__SOUND_ASEQUENCER_H
-#define _UAPI__SOUND_ASEQUENCER_H
+#ifndef __SOUND_ASEQUENCER_H
+#define __SOUND_ASEQUENCER_H
 
 #include <sound/asound.h>
 
 /** version of the sequencer */
-#define SNDRV_SEQ_VERSION SNDRV_PROTOCOL_VERSION(1, 0, 4)
+#define SNDRV_SEQ_VERSION SNDRV_PROTOCOL_VERSION(1, 0, 3)
 
 /**
  * definition of sequencer event types
@@ -207,7 +207,7 @@ struct snd_seq_ev_raw32 {
 struct snd_seq_ev_ext {
 	unsigned int len;	/* length of data */
 	void *ptr;		/* pointer to data (note: maybe 64-bit) */
-} __packed;
+} __attribute__((packed));
 
 struct snd_seq_result {
 	int event;		/* processed event type */
@@ -251,7 +251,7 @@ struct snd_seq_ev_quote {
 	struct snd_seq_addr origin;		/* original sender */
 	unsigned short value;		/* optional data */
 	struct snd_seq_event *event;		/* quoted event */
-} __packed;
+} __attribute__((packed));
 
 union snd_seq_event_data { /* event data... */
 	struct snd_seq_ev_note note;
@@ -339,9 +339,9 @@ struct snd_seq_running_info {
 
 	/* client types */
 typedef int __bitwise snd_seq_client_type_t;
-#define	NO_CLIENT	((__force snd_seq_client_type_t) 0)
-#define	USER_CLIENT	((__force snd_seq_client_type_t) 1)
-#define	KERNEL_CLIENT	((__force snd_seq_client_type_t) 2)
+#define	NO_CLIENT	((snd_seq_client_type_t) 0)
+#define	USER_CLIENT	((snd_seq_client_type_t) 1)
+#define	KERNEL_CLIENT	((snd_seq_client_type_t) 2)
                         
 	/* event filter flags */
 #define SNDRV_SEQ_FILTER_BROADCAST	(1U<<0)	/* accept broadcast messages */
@@ -461,8 +461,6 @@ struct snd_seq_remove_events {
 #define SNDRV_SEQ_PORT_FLG_TIMESTAMP	(1<<1)
 #define SNDRV_SEQ_PORT_FLG_TIME_REAL	(1<<2)
 
-#define SNDRV_SEQ_PORT_FLG_IS_MIDI1	(1<<3)	/* Keep MIDI 1.0 protocol */
-
 /* port direction */
 #define SNDRV_SEQ_PORT_DIR_UNKNOWN	0
 #define SNDRV_SEQ_PORT_DIR_INPUT	1
@@ -525,12 +523,11 @@ struct snd_seq_queue_status {
 /* queue tempo */
 struct snd_seq_queue_tempo {
 	int queue;			/* sequencer queue */
-	unsigned int tempo;		/* current tempo, us/tick (or different time-base below) */
+	unsigned int tempo;		/* current tempo, us/tick */
 	int ppq;			/* time resolution, ticks/quarter */
 	unsigned int skew_value;	/* queue skew */
 	unsigned int skew_base;		/* queue skew base */
-	unsigned short tempo_base;	/* tempo base in nsec unit; either 10 or 1000 */
-	char reserved[22];		/* for the future */
+	char reserved[24];		/* for the future */
 };
 
 
@@ -603,7 +600,7 @@ struct snd_seq_client_ump_info {
 	int client;			/* client number to inquire/set */
 	int type;			/* type to inquire/set */
 	unsigned char info[512];	/* info (either UMP ep or block info) */
-} __packed;
+} __attribute__((packed));
 
 /*
  *  IOCTL commands
@@ -648,4 +645,4 @@ struct snd_seq_client_ump_info {
 #define SNDRV_SEQ_IOCTL_QUERY_NEXT_CLIENT	_IOWR('S', 0x51, struct snd_seq_client_info)
 #define SNDRV_SEQ_IOCTL_QUERY_NEXT_PORT	_IOWR('S', 0x52, struct snd_seq_port_info)
 
-#endif /* _UAPI__SOUND_ASEQUENCER_H */
+#endif /* __SOUND_ASEQUENCER_H */

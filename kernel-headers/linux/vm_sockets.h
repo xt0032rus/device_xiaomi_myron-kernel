@@ -14,8 +14,8 @@
  * more details.
  */
 
-#ifndef _UAPI_VM_SOCKETS_H
-#define _UAPI_VM_SOCKETS_H
+#ifndef _VM_SOCKETS_H
+#define _VM_SOCKETS_H
 
 #include <linux/socket.h>
 #include <linux/types.h>
@@ -83,13 +83,11 @@
 
 #define SO_VM_SOCKETS_CONNECT_TIMEOUT_NEW 8
 
-#if !defined(__KERNEL__)
 #if __BITS_PER_LONG == 64 || (defined(__x86_64__) && defined(__ILP32__))
 #define SO_VM_SOCKETS_CONNECT_TIMEOUT SO_VM_SOCKETS_CONNECT_TIMEOUT_OLD
 #else
 #define SO_VM_SOCKETS_CONNECT_TIMEOUT \
 	(sizeof(time_t) == sizeof(__kernel_long_t) ? SO_VM_SOCKETS_CONNECT_TIMEOUT_OLD : SO_VM_SOCKETS_CONNECT_TIMEOUT_NEW)
-#endif
 #endif
 
 /* The vSocket equivalent of INADDR_ANY.  This works for the svm_cid field of
@@ -208,4 +206,4 @@ struct sockaddr_vm {
 
 #define VSOCK_RECVERR	1
 
-#endif /* _UAPI_VM_SOCKETS_H */
+#endif /* _VM_SOCKETS_H */

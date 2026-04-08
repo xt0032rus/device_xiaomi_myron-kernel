@@ -31,8 +31,8 @@
  * Copyright (C) Stefan Hajnoczi <stefanha@redhat.com>, 2015
  */
 
-#ifndef _UAPI_LINUX_VIRTIO_VSOCK_H
-#define _UAPI_LINUX_VIRTIO_VSOCK_H
+#ifndef _LINUX_VIRTIO_VSOCK_H
+#define _LINUX_VIRTIO_VSOCK_H
 
 #include <linux/types.h>
 #include <linux/virtio_ids.h>
@@ -101,4 +101,4 @@ enum virtio_vsock_rw {
 	VIRTIO_VSOCK_SEQ_EOR = 2,
 };
 
-#endif /* _UAPI_LINUX_VIRTIO_VSOCK_H */
+#endif /* _LINUX_VIRTIO_VSOCK_H */

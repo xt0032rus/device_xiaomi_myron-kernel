@@ -14,8 +14,8 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-#ifndef _UAPI__ASM_SIGCONTEXT_H
-#define _UAPI__ASM_SIGCONTEXT_H
+#ifndef __ASM_SIGCONTEXT_H
+#define __ASM_SIGCONTEXT_H
 
 #ifndef __ASSEMBLY__
 
@@ -98,13 +98,6 @@ struct esr_context {
 	__u64 esr;
 };
 
-#define POE_MAGIC	0x504f4530
-
-struct poe_context {
-	struct _aarch64_ctx head;
-	__u64 por_el0;
-};
-
 /*
  * extra_context: describes extra space in the signal frame for
  * additional structures that don't fit in sigcontext.__reserved[].
@@ -157,14 +150,6 @@ struct sve_context {
 struct tpidr2_context {
 	struct _aarch64_ctx head;
 	__u64 tpidr2;
-};
-
-/* FPMR context */
-#define FPMR_MAGIC	0x46504d52
-
-struct fpmr_context {
-	struct _aarch64_ctx head;
-	__u64 fpmr;
 };
 
 #define ZA_MAGIC	0x54366345
@@ -346,4 +331,4 @@ struct zt_context {
 #define ZT_SIG_CONTEXT_SIZE(n) \
 	(sizeof(struct zt_context) + ZT_SIG_REGS_SIZE(n))
 
-#endif /* _UAPI__ASM_SIGCONTEXT_H */
+#endif /* __ASM_SIGCONTEXT_H */

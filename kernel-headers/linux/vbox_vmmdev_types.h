@@ -237,7 +237,7 @@ struct vmmdev_hgcm_function_parameter32 {
 			__u32 offset;
 		} page_list;
 	} u;
-} __packed;
+} __attribute__((packed));
 VMMDEV_ASSERT_SIZE(vmmdev_hgcm_function_parameter32, 4 + 8);
 
 /** HGCM function parameter, 64-bit client. */
@@ -252,15 +252,15 @@ struct vmmdev_hgcm_function_parameter64 {
 				__u64 phys_addr;
 				__u64 linear_addr;
 			} u;
-		} __packed pointer;
+		} __attribute__((packed)) pointer;
 		struct {
 			/** Size of the buffer described by the page list. */
 			__u32 size;
 			/** Relative to the request header. */
 			__u32 offset;
 		} page_list;
-	} __packed u;
-} __packed;
+	} __attribute__((packed)) u;
+} __attribute__((packed));
 VMMDEV_ASSERT_SIZE(vmmdev_hgcm_function_parameter64, 4 + 12);
 
 #if __BITS_PER_LONG == 64
@@ -282,10 +282,7 @@ struct vmmdev_hgcm_pagelist {
 	__u32 flags;             /** VMMDEV_HGCM_F_PARM_*. */
 	__u16 offset_first_page; /** Data offset in the first page. */
 	__u16 page_count;        /** Number of pages. */
-	union {
-		__u64 unused;	/** Deprecated place-holder for first "pages" entry. */
-		__DECLARE_FLEX_ARRAY(__u64, pages); /** Page addresses. */
-	};
+	__u64 pages[1];          /** Page addresses. */
 };
 VMMDEV_ASSERT_SIZE(vmmdev_hgcm_pagelist, 4 + 2 + 2 + 8);
 

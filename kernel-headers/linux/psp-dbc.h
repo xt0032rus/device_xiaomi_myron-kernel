@@ -33,7 +33,7 @@ struct dbc_user_nonce {
 	__u32	auth_needed;
 	__u8	nonce[DBC_NONCE_SIZE];
 	__u8	signature[DBC_SIG_SIZE];
-} __packed;
+} __attribute__((packed));
 
 /**
  * struct dbc_user_setuid - UID exchange structure (input).
@@ -43,7 +43,7 @@ struct dbc_user_nonce {
 struct dbc_user_setuid {
 	__u8	uid[DBC_UID_SIZE];
 	__u8	signature[DBC_SIG_SIZE];
-} __packed;
+} __attribute__((packed));
 
 /**
  * struct dbc_user_param - Parameter exchange structure (input/output).
@@ -60,7 +60,7 @@ struct dbc_user_param {
 	__u32	msg_index;
 	__u32	param;
 	__u8	signature[DBC_SIG_SIZE];
-} __packed;
+} __attribute__((packed));
 
 /**
  * Dynamic Boost Control (DBC) IOC

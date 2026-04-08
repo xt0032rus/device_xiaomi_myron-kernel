@@ -211,25 +211,12 @@
  *  7.39
  *  - add FUSE_DIRECT_IO_ALLOW_MMAP
  *  - add FUSE_STATX and related structures
- *
- *  7.40
- *  - add max_stack_depth to fuse_init_out, add FUSE_PASSTHROUGH init flag
- *  - add backing_id to fuse_open_out, add FOPEN_PASSTHROUGH open flag
- *  - add FUSE_NO_EXPORT_SUPPORT init flag
- *  - add FUSE_NOTIFY_RESEND, add FUSE_HAS_RESEND init flag
- *
- *  7.41
- *  - add FUSE_ALLOW_IDMAP
  */
 
 #ifndef _LINUX_FUSE_H
 #define _LINUX_FUSE_H
 
-#ifdef __KERNEL__
-#include <linux/types.h>
-#else
 #include <stdint.h>
-#endif
 
 /*
  * Version negotiation:
@@ -255,7 +242,7 @@
 #define FUSE_KERNEL_VERSION 7
 
 /** Minor version number of this interface */
-#define FUSE_KERNEL_MINOR_VERSION 41
+#define FUSE_KERNEL_MINOR_VERSION 39
 
 /** The node ID of the root inode */
 #define FUSE_ROOT_ID 1
@@ -362,7 +349,6 @@ struct fuse_file_lock {
  * FOPEN_STREAM: the file is stream-like (no file position at all)
  * FOPEN_NOFLUSH: don't flush data cache on close (unless FUSE_WRITEBACK_CACHE)
  * FOPEN_PARALLEL_DIRECT_WRITES: Allow concurrent direct writes on the same inode
- * FOPEN_PASSTHROUGH: passthrough read/write io for this open file
  */
 #define FOPEN_DIRECT_IO		(1 << 0)
 #define FOPEN_KEEP_CACHE	(1 << 1)
@@ -371,7 +357,6 @@ struct fuse_file_lock {
 #define FOPEN_STREAM		(1 << 4)
 #define FOPEN_NOFLUSH		(1 << 5)
 #define FOPEN_PARALLEL_DIRECT_WRITES	(1 << 6)
-#define FOPEN_PASSTHROUGH	(1 << 7)
 
 /**
  * INIT request/reply flags
@@ -421,10 +406,6 @@ struct fuse_file_lock {
  *			symlink and mknod (single group that matches parent)
  * FUSE_HAS_EXPIRE_ONLY: kernel supports expiry-only entry invalidation
  * FUSE_DIRECT_IO_ALLOW_MMAP: allow shared mmap in FOPEN_DIRECT_IO mode.
- * FUSE_NO_EXPORT_SUPPORT: explicitly disable export support
- * FUSE_HAS_RESEND: kernel supports resending pending requests, and the high bit
- *		    of the request ID indicates resend requests
- * FUSE_ALLOW_IDMAP: allow creation of idmapped mounts
  */
 #define FUSE_ASYNC_READ		(1 << 0)
 #define FUSE_POSIX_LOCKS	(1 << 1)
@@ -464,13 +445,21 @@ struct fuse_file_lock {
 #define FUSE_CREATE_SUPP_GROUP	(1ULL << 34)
 #define FUSE_HAS_EXPIRE_ONLY	(1ULL << 35)
 #define FUSE_DIRECT_IO_ALLOW_MMAP (1ULL << 36)
-#define FUSE_PASSTHROUGH	(1ULL << 37)
-#define FUSE_NO_EXPORT_SUPPORT	(1ULL << 38)
-#define FUSE_HAS_RESEND		(1ULL << 39)
 
 /* Obsolete alias for FUSE_DIRECT_IO_ALLOW_MMAP */
 #define FUSE_DIRECT_IO_RELAX	FUSE_DIRECT_IO_ALLOW_MMAP
-#define FUSE_ALLOW_IDMAP	(1ULL << 40)
+
+/*
+ * For FUSE < 7.36 FUSE_PASSTHROUGH has value (1 << 31).
+ * This condition check is not really required, but would prevent having a
+ * broken commit in the tree.
+ */
+#if FUSE_KERNEL_VERSION > 7 ||                                                 \
+	(FUSE_KERNEL_VERSION == 7 && FUSE_KERNEL_MINOR_VERSION >= 36)
+#define FUSE_PASSTHROUGH (1ULL << 63)
+#else
+#define FUSE_PASSTHROUGH (1 << 31)
+#endif
 
 /**
  * CUSE INIT request/reply flags
@@ -638,6 +627,7 @@ enum fuse_opcode {
 	FUSE_SYNCFS		= 50,
 	FUSE_TMPFILE		= 51,
 	FUSE_STATX		= 52,
+	FUSE_CANONICAL_PATH	= 2016,
 
 	/* CUSE specific operations */
 	CUSE_INIT		= 4096,
@@ -654,7 +644,6 @@ enum fuse_notify_code {
 	FUSE_NOTIFY_STORE = 4,
 	FUSE_NOTIFY_RETRIEVE = 5,
 	FUSE_NOTIFY_DELETE = 6,
-	FUSE_NOTIFY_RESEND = 7,
 	FUSE_NOTIFY_CODE_MAX,
 };
 
@@ -781,7 +770,7 @@ struct fuse_create_in {
 struct fuse_open_out {
 	uint64_t	fh;
 	uint32_t	open_flags;
-	int32_t		backing_id;
+	uint32_t	passthrough_fh;
 };
 
 struct fuse_release_in {
@@ -897,8 +886,7 @@ struct fuse_init_out {
 	uint16_t	max_pages;
 	uint16_t	map_alignment;
 	uint32_t	flags2;
-	uint32_t	max_stack_depth;
-	uint32_t	unused[6];
+	uint32_t	unused[7];
 };
 
 #define CUSE_INIT_INFO_MAX 4096
@@ -981,29 +969,6 @@ struct fuse_fallocate_in {
 	uint32_t	padding;
 };
 
-/**
- * FUSE request unique ID flag
- *
- * Indicates whether this is a resend request. The receiver should handle this
- * request accordingly.
- */
-#define FUSE_UNIQUE_RESEND (1ULL << 63)
-
-/**
- * This value will be set by the kernel to
- * (struct fuse_in_header).{uid,gid} fields in
- * case when:
- * - fuse daemon enabled FUSE_ALLOW_IDMAP
- * - idmapping information is not available and uid/gid
- *   can not be mapped in accordance with an idmapping.
- *
- * Note: an idmapping information always available
- * for inode creation operations like:
- * FUSE_MKNOD, FUSE_SYMLINK, FUSE_MKDIR, FUSE_TMPFILE,
- * FUSE_CREATE and FUSE_RENAME2 (with RENAME_WHITEOUT).
- */
-#define FUSE_INVALID_UIDGID ((uint32_t)(-1))
-
 struct fuse_in_header {
 	uint32_t	len;
 	uint32_t	opcode;
@@ -1012,8 +977,19 @@ struct fuse_in_header {
 	uint32_t	uid;
 	uint32_t	gid;
 	uint32_t	pid;
-	uint16_t	total_extlen; /* length of extensions in 8byte units */
-	uint16_t	padding;
+
+	/*
+	 * fuse-bpf reused the padding field to pass errors to postfilter
+	 * Unfortunately this field has now been used for extlen.
+	 * Manage at least temporarily with a union
+	 */
+	union {
+		struct {
+			uint16_t	total_extlen; /* length of extensions in 8byte units */
+			uint16_t	padding;
+		};
+		uint32_t error_in;
+	};
 };
 
 struct fuse_out_header {
@@ -1093,18 +1069,12 @@ struct fuse_notify_retrieve_in {
 	uint64_t	dummy4;
 };
 
-struct fuse_backing_map {
-	int32_t		fd;
-	uint32_t	flags;
-	uint64_t	padding;
-};
-
 /* Device ioctls: */
 #define FUSE_DEV_IOC_MAGIC		229
 #define FUSE_DEV_IOC_CLONE		_IOR(FUSE_DEV_IOC_MAGIC, 0, uint32_t)
-#define FUSE_DEV_IOC_BACKING_OPEN	_IOW(FUSE_DEV_IOC_MAGIC, 1, \
-					     struct fuse_backing_map)
-#define FUSE_DEV_IOC_BACKING_CLOSE	_IOW(FUSE_DEV_IOC_MAGIC, 2, uint32_t)
+/* 127 is reserved for the V1 interface implementation in Android (deprecated) */
+/* 126 is reserved for the V2 interface implementation in Android */
+#define FUSE_DEV_IOC_PASSTHROUGH_OPEN	_IOW(FUSE_DEV_IOC_MAGIC, 126, uint32_t)
 
 struct fuse_lseek_in {
 	uint64_t	fh;

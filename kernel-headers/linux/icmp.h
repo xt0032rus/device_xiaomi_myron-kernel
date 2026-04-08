@@ -15,8 +15,8 @@
  *		as published by the Free Software Foundation; either version
  *		2 of the License, or (at your option) any later version.
  */
-#ifndef _UAPI_LINUX_ICMP_H
-#define _UAPI_LINUX_ICMP_H
+#ifndef _LINUX_ICMP_H
+#define _LINUX_ICMP_H
 
 #include <linux/types.h>
 #include <asm/byteorder.h>
@@ -97,7 +97,11 @@ struct icmphdr {
 	} echo;
 	__be32	gateway;
 	struct {
+#ifdef __BIONIC__
+		__be16	__linux_unused;
+#else
 		__be16	__unused;
+#endif
 		__be16	mtu;
 	} frag;
 	__u8	reserved[4];
@@ -159,4 +163,4 @@ struct icmp_ext_echo_iio {
 		} addr;
 	} ident;
 };
-#endif /* _UAPI_LINUX_ICMP_H */
+#endif /* _LINUX_ICMP_H */

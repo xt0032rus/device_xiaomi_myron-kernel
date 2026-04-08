@@ -3,8 +3,8 @@
  * Copyright (c) 2022, Google LLC
  */
 
-#ifndef _UAPI_LINUX_LOOP_LOADPIN_H
-#define _UAPI_LINUX_LOOP_LOADPIN_H
+#ifndef _LINUX_LOOP_LOADPIN_H
+#define _LINUX_LOOP_LOADPIN_H
 
 #define LOADPIN_IOC_MAGIC	'L'
 
@@ -19,4 +19,4 @@
  */
 #define LOADPIN_IOC_SET_TRUSTED_VERITY_DIGESTS _IOW(LOADPIN_IOC_MAGIC, 0x00, unsigned int)
 
-#endif /* _UAPI_LINUX_LOOP_LOADPIN_H */
+#endif /* _LINUX_LOOP_LOADPIN_H */

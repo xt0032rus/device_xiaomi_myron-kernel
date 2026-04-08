@@ -9,8 +9,8 @@
  *               1998-2002    Jens Axboe, axboe@suse.de
  */
  
-#ifndef _UAPI_LINUX_CDROM_H
-#define _UAPI_LINUX_CDROM_H
+#ifndef _LINUX_CDROM_H
+#define _LINUX_CDROM_H
 
 #include <linux/types.h>
 #include <asm/byteorder.h>
@@ -243,7 +243,7 @@ struct cdrom_read_audio
 	union cdrom_addr addr; /* frame address */
 	__u8 addr_format;      /* CDROM_LBA or CDROM_MSF */
 	int nframes;           /* number of 2352-byte-frames to read at once */
-	__u8 __user *buf;      /* frame buffer (size: nframes*2352 bytes) */
+	__u8 *buf;      /* frame buffer (size: nframes*2352 bytes) */
 };
 
 /* This struct is used with the CDROMMULTISESSION ioctl */
@@ -284,16 +284,16 @@ struct cdrom_blk
 struct cdrom_generic_command
 {
 	unsigned char 		cmd[CDROM_PACKET_SIZE];
-	unsigned char		__user *buffer;
+	unsigned char		*buffer;
 	unsigned int 		buflen;
 	int			stat;
-	struct request_sense	__user *sense;
+	struct request_sense	*sense;
 	unsigned char		data_direction;
 	int			quiet;
 	int			timeout;
 	union {
-		void		__user *reserved[1];	/* unused, actually */
-		void            __user *unused;
+		void		*reserved[1];	/* unused, actually */
+		void            *unused;
 	};
 };
 
@@ -966,4 +966,4 @@ struct rm_feature_desc {
 	__u8 reserved4;
 };
 
-#endif /* _UAPI_LINUX_CDROM_H */
+#endif /* _LINUX_CDROM_H */

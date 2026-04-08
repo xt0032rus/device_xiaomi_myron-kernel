@@ -9,8 +9,8 @@
  * as published by the Free Software Foundation.
  */
 
-#ifndef _UAPI__HDLC_H
-#define _UAPI__HDLC_H
+#ifndef __HDLC_H
+#define __HDLC_H
 
 
 #define HDLC_MAX_MTU 1500	/* Ethernet 1500 bytes */
@@ -21,4 +21,4 @@
 #endif
 
 
-#endif /* _UAPI__HDLC_H */
+#endif /* __HDLC_H */

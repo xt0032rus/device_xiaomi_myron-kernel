@@ -4,8 +4,8 @@
  * Copyright (C) 2021 ARM Ltd.
  */
 
-#ifndef _UAPI_LINUX_VIRTIO_SCMI_H
-#define _UAPI_LINUX_VIRTIO_SCMI_H
+#ifndef _LINUX_VIRTIO_SCMI_H
+#define _LINUX_VIRTIO_SCMI_H
 
 #include <linux/virtio_types.h>
 
@@ -21,4 +21,4 @@
 #define VIRTIO_SCMI_VQ_RX 1 /* eventq */
 #define VIRTIO_SCMI_VQ_MAX_CNT 2
 
-#endif /* _UAPI_LINUX_VIRTIO_SCMI_H */
+#endif /* _LINUX_VIRTIO_SCMI_H */

@@ -12,11 +12,11 @@
  *
  */
 
-#ifndef _UAPI__LINUX_IPMI_H
-#define _UAPI__LINUX_IPMI_H
+#ifndef __LINUX_IPMI_H
+#define __LINUX_IPMI_H
 
 #include <linux/ipmi_msgdefs.h>
-#include <linux/compiler.h>
+
 
 /*
  * This file describes an interface to an IPMI driver.  You have to
@@ -149,7 +149,7 @@ struct ipmi_msg {
 	unsigned char  netfn;
 	unsigned char  cmd;
 	unsigned short data_len;
-	unsigned char  __user *data;
+	unsigned char  *data;
 };
 
 struct kernel_ipmi_msg {
@@ -245,7 +245,7 @@ struct kernel_ipmi_msg {
 
 /* Messages sent to the interface are this format. */
 struct ipmi_req {
-	unsigned char __user *addr; /* Address to send the message to. */
+	unsigned char *addr; /* Address to send the message to. */
 	unsigned int  addr_len;
 
 	long    msgid; /* The sequence number for the message.  This
@@ -294,7 +294,7 @@ struct ipmi_recv {
 	int     recv_type; /* Is this a command, response or an
 			      asyncronous event. */
 
-	unsigned char __user *addr;    /* Address the message was from is put
+	unsigned char *addr;    /* Address the message was from is put
 				   here.  The caller must supply the
 				   memory. */
 	unsigned int  addr_len; /* The size of the address buffer.
@@ -440,4 +440,4 @@ struct ipmi_timing_parms {
 #define IPMICTL_GET_MAINTENANCE_MODE_CMD	_IOR(IPMI_IOC_MAGIC, 30, int)
 #define IPMICTL_SET_MAINTENANCE_MODE_CMD	_IOW(IPMI_IOC_MAGIC, 31, int)
 
-#endif /* _UAPI__LINUX_IPMI_H */
+#endif /* __LINUX_IPMI_H */

@@ -491,7 +491,7 @@ enum comedi_counter_status_flags {
 struct comedi_insn {
 	unsigned int insn;
 	unsigned int n;
-	unsigned int __user *data;
+	unsigned int *data;
 	unsigned int subdev;
 	unsigned int chanspec;
 	unsigned int unused[3];
@@ -506,7 +506,7 @@ struct comedi_insn {
  */
 struct comedi_insnlist {
 	unsigned int n_insns;
-	struct comedi_insn __user *insns;
+	struct comedi_insn *insns;
 };
 
 /**
@@ -608,7 +608,7 @@ struct comedi_cmd {
 	unsigned int *chanlist;
 	unsigned int chanlist_len;
 
-	short __user *data;
+	short *data;
 	unsigned int data_len;
 };
 
@@ -632,9 +632,9 @@ struct comedi_cmd {
  */
 struct comedi_chaninfo {
 	unsigned int subdev;
-	unsigned int __user *maxdata_list;
-	unsigned int __user *flaglist;
-	unsigned int __user *rangelist;
+	unsigned int *maxdata_list;
+	unsigned int *flaglist;
+	unsigned int *rangelist;
 	unsigned int unused[4];
 };
 
@@ -657,7 +657,7 @@ struct comedi_chaninfo {
  */
 struct comedi_rangeinfo {
 	unsigned int range_type;
-	void __user *range_ptr;
+	void *range_ptr;
 };
 
 /**

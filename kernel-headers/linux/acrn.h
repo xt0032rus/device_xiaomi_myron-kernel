@@ -8,8 +8,8 @@
  * Copyright (C) 2021 Intel Corporation. All rights reserved.
  */
 
-#ifndef _UAPI_ACRN_H
-#define _UAPI_ACRN_H
+#ifndef _ACRN_H
+#define _ACRN_H
 
 #include <linux/types.h>
 
@@ -646,4 +646,4 @@ struct acrn_irqfd {
 #define ACRN_IOCTL_IRQFD		\
 	_IOW(ACRN_IOCTL_TYPE, 0x71, struct acrn_irqfd)
 
-#endif /* _UAPI_ACRN_H */
+#endif /* _ACRN_H */

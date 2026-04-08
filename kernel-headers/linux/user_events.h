@@ -5,14 +5,13 @@
  * Authors:
  *   Beau Belgrave <beaub@linux.microsoft.com>
  */
-#ifndef _UAPI_LINUX_USER_EVENTS_H
-#define _UAPI_LINUX_USER_EVENTS_H
+#ifndef _LINUX_USER_EVENTS_H
+#define _LINUX_USER_EVENTS_H
 
 #include <linux/types.h>
 #include <linux/ioctl.h>
 
 #define USER_EVENTS_SYSTEM "user_events"
-#define USER_EVENTS_MULTI_SYSTEM "user_events_multi"
 #define USER_EVENTS_PREFIX "u:"
 
 /* Create dynamic location entry within a 32-bit value */
@@ -23,11 +22,8 @@ enum user_reg_flag {
 	/* Event will not delete upon last reference closing */
 	USER_EVENT_REG_PERSIST		= 1U << 0,
 
-	/* Event will be allowed to have multiple formats */
-	USER_EVENT_REG_MULTI_FORMAT	= 1U << 1,
-
 	/* This value or above is currently non-ABI */
-	USER_EVENT_REG_MAX		= 1U << 2,
+	USER_EVENT_REG_MAX		= 1U << 1,
 };
 
 /*
@@ -91,4 +87,4 @@ struct user_unreg {
 /* Requests to unregister a user_event */
 #define DIAG_IOCSUNREG _IOW(DIAG_IOC_MAGIC, 2, struct user_unreg*)
 
-#endif /* _UAPI_LINUX_USER_EVENTS_H */
+#endif /* _LINUX_USER_EVENTS_H */

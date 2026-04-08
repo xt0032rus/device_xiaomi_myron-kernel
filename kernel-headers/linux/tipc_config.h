@@ -253,7 +253,7 @@ struct tlv_desc {
 #define TLV_SPACE(datalen) (TLV_ALIGN(TLV_LENGTH(datalen)))
 #define TLV_DATA(tlv) ((void *)((char *)(tlv) + TLV_LENGTH(0)))
 
-static inline int TLV_OK(const void *tlv, __u16 space)
+static __inline__ int TLV_OK(const void *tlv, __u16 space)
 {
 	/*
 	 * Would also like to check that "tlv" is a multiple of 4,
@@ -268,33 +268,33 @@ static inline int TLV_OK(const void *tlv, __u16 space)
 		(__be16_to_cpu(((struct tlv_desc *)tlv)->tlv_len) <= space);
 }
 
-static inline int TLV_CHECK(const void *tlv, __u16 space, __u16 exp_type)
+static __inline__ int TLV_CHECK(const void *tlv, __u16 space, __u16 exp_type)
 {
 	return TLV_OK(tlv, space) &&
 		(__be16_to_cpu(((struct tlv_desc *)tlv)->tlv_type) == exp_type);
 }
 
-static inline int TLV_GET_LEN(struct tlv_desc *tlv)
+static __inline__ int TLV_GET_LEN(struct tlv_desc *tlv)
 {
 	return __be16_to_cpu(tlv->tlv_len);
 }
 
-static inline void TLV_SET_LEN(struct tlv_desc *tlv, __u16 len)
+static __inline__ void TLV_SET_LEN(struct tlv_desc *tlv, __u16 len)
 {
 	tlv->tlv_len = __cpu_to_be16(len);
 }
 
-static inline int TLV_CHECK_TYPE(struct tlv_desc *tlv,  __u16 type)
+static __inline__ int TLV_CHECK_TYPE(struct tlv_desc *tlv,  __u16 type)
 {
 	return (__be16_to_cpu(tlv->tlv_type) == type);
 }
 
-static inline void TLV_SET_TYPE(struct tlv_desc *tlv, __u16 type)
+static __inline__ void TLV_SET_TYPE(struct tlv_desc *tlv, __u16 type)
 {
 	tlv->tlv_type = __cpu_to_be16(type);
 }
 
-static inline int TLV_SET(void *tlv, __u16 type, void *data, __u16 len)
+static __inline__ int TLV_SET(void *tlv, __u16 type, void *data, __u16 len)
 {
 	struct tlv_desc *tlv_ptr;
 	int tlv_len;
@@ -320,29 +320,29 @@ struct tlv_list_desc {
 	__u32 tlv_space;		/* # bytes from curr TLV to list end */
 };
 
-static inline void TLV_LIST_INIT(struct tlv_list_desc *list,
+static __inline__ void TLV_LIST_INIT(struct tlv_list_desc *list,
 				 void *data, __u32 space)
 {
 	list->tlv_ptr = (struct tlv_desc *)data;
 	list->tlv_space = space;
 }
 
-static inline int TLV_LIST_EMPTY(struct tlv_list_desc *list)
+static __inline__ int TLV_LIST_EMPTY(struct tlv_list_desc *list)
 {
 	return (list->tlv_space == 0);
 }
 
-static inline int TLV_LIST_CHECK(struct tlv_list_desc *list, __u16 exp_type)
+static __inline__ int TLV_LIST_CHECK(struct tlv_list_desc *list, __u16 exp_type)
 {
 	return TLV_CHECK(list->tlv_ptr, list->tlv_space, exp_type);
 }
 
-static inline void *TLV_LIST_DATA(struct tlv_list_desc *list)
+static __inline__ void *TLV_LIST_DATA(struct tlv_list_desc *list)
 {
 	return TLV_DATA(list->tlv_ptr);
 }
 
-static inline void TLV_LIST_STEP(struct tlv_list_desc *list)
+static __inline__ void TLV_LIST_STEP(struct tlv_list_desc *list)
 {
 	__u16 tlv_space = TLV_ALIGN(__be16_to_cpu(list->tlv_ptr->tlv_len));
 
@@ -392,7 +392,7 @@ struct tipc_cfg_msg_hdr {
 #define TCM_SPACE(datalen)  (TCM_ALIGN(TCM_LENGTH(datalen)))
 #define TCM_DATA(tcm_hdr)   ((void *)((char *)(tcm_hdr) + TCM_LENGTH(0)))
 
-static inline int TCM_SET(void *msg, __u16 cmd, __u16 flags,
+static __inline__ int TCM_SET(void *msg, __u16 cmd, __u16 flags,
 			  void *data, __u16 data_len)
 {
 	struct tipc_cfg_msg_hdr *tcm_hdr;

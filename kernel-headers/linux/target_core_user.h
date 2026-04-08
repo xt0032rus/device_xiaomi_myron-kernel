@@ -59,7 +59,7 @@ struct tcmu_mailbox {
 	/* Updated by user. On its own cacheline */
 	__u32 cmd_tail __attribute__((__aligned__(ALIGN_SIZE)));
 
-} __packed;
+} __attribute__((packed));
 
 enum tcmu_opcode {
 	TCMU_OP_PAD = 0,
@@ -79,27 +79,27 @@ struct tcmu_cmd_entry_hdr {
 #define TCMU_UFLAG_KEEP_BUF   0x4
 	__u8 uflags;
 
-} __packed;
+} __attribute__((packed));
 
 #define TCMU_OP_MASK 0x7
 
-static inline enum tcmu_opcode tcmu_hdr_get_op(__u32 len_op)
+static __inline__ enum tcmu_opcode tcmu_hdr_get_op(__u32 len_op)
 {
 	return len_op & TCMU_OP_MASK;
 }
 
-static inline void tcmu_hdr_set_op(__u32 *len_op, enum tcmu_opcode op)
+static __inline__ void tcmu_hdr_set_op(__u32 *len_op, enum tcmu_opcode op)
 {
 	*len_op &= ~TCMU_OP_MASK;
 	*len_op |= (op & TCMU_OP_MASK);
 }
 
-static inline __u32 tcmu_hdr_get_len(__u32 len_op)
+static __inline__ __u32 tcmu_hdr_get_len(__u32 len_op)
 {
 	return len_op & ~TCMU_OP_MASK;
 }
 
-static inline void tcmu_hdr_set_len(__u32 *len_op, __u32 len)
+static __inline__ void tcmu_hdr_set_len(__u32 *len_op, __u32 len)
 {
 	*len_op &= TCMU_OP_MASK;
 	*len_op |= len;
@@ -130,7 +130,7 @@ struct tcmu_cmd_entry {
 		} rsp;
 	};
 
-} __packed;
+} __attribute__((packed));
 
 struct tcmu_tmr_entry {
 	struct tcmu_cmd_entry_hdr hdr;
@@ -153,7 +153,7 @@ struct tcmu_tmr_entry {
 	__u64 __pad3;
 	__u64 __pad4;
 	__u16 cmd_ids[];
-} __packed;
+} __attribute__((packed));
 
 #define TCMU_OP_ALIGN_SIZE sizeof(__u64)
 

@@ -16,8 +16,8 @@
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
  */
 
-#ifndef _UAPICN_PROC_H
-#define _UAPICN_PROC_H
+#ifndef CN_PROC_H
+#define CN_PROC_H
 
 #include <linux/types.h>
 
@@ -67,7 +67,7 @@ struct proc_input {
 	enum proc_cn_event event_type;
 };
 
-static inline enum proc_cn_event valid_event(enum proc_cn_event ev_type)
+static __inline__ enum proc_cn_event valid_event(enum proc_cn_event ev_type)
 {
 	return (enum proc_cn_event)(ev_type & PROC_EVENT_ALL);
 }
@@ -156,4 +156,4 @@ struct proc_event {
 	} event_data;
 };
 
-#endif /* _UAPICN_PROC_H */
+#endif /* CN_PROC_H */

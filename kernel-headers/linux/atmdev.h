@@ -4,8 +4,8 @@
 /* Written 1995-2000 by Werner Almesberger, EPFL LRC/ICA */
  
 
-#ifndef _UAPILINUX_ATMDEV_H
-#define _UAPILINUX_ATMDEV_H
+#ifndef LINUX_ATMDEV_H
+#define LINUX_ATMDEV_H
 
 
 #include <linux/atmapi.h>
@@ -155,7 +155,7 @@ struct atm_dev_stats {
 
 struct atm_iobuf {
 	int length;
-	void __user *buffer;
+	void *buffer;
 };
 
 /* for ATM_GETCIRANGE / ATM_SETCIRANGE */
@@ -209,4 +209,4 @@ struct atm_cirange {
 
 
 
-#endif /* _UAPILINUX_ATMDEV_H */
+#endif /* LINUX_ATMDEV_H */

@@ -5,8 +5,8 @@
  * Copyright (c) 2020, The Linux Foundation. All rights reserved.
  */
 
-#ifndef _UAPI_REMOTEPROC_CDEV_H_
-#define _UAPI_REMOTEPROC_CDEV_H_
+#ifndef _REMOTEPROC_CDEV_H_
+#define _REMOTEPROC_CDEV_H_
 
 #include <linux/ioctl.h>
 #include <linux/types.h>

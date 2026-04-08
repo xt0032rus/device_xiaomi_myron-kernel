@@ -3,8 +3,8 @@
  * Copyright 2020-2021 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  */
 
-#ifndef _UAPI_LINUX_NITRO_ENCLAVES_H_
-#define _UAPI_LINUX_NITRO_ENCLAVES_H_
+#ifndef _LINUX_NITRO_ENCLAVES_H_
+#define _LINUX_NITRO_ENCLAVES_H_
 
 #include <linux/types.h>
 
@@ -356,4 +356,4 @@ struct ne_enclave_start_info {
 	__u64	enclave_cid;
 };
 
-#endif /* _UAPI_LINUX_NITRO_ENCLAVES_H_ */
+#endif /* _LINUX_NITRO_ENCLAVES_H_ */

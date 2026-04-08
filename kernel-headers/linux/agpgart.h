@@ -24,8 +24,8 @@
  *
  */
 
-#ifndef _UAPI_AGP_H
-#define _UAPI_AGP_H
+#ifndef _AGP_H
+#define _AGP_H
 
 #define AGPIOC_BASE       'A'
 #define AGPIOC_INFO       _IOR (AGPIOC_BASE, 0, struct agp_info*)
@@ -50,7 +50,6 @@
 #define FALSE 0
 #endif
 
-#ifndef __KERNEL__
 #include <linux/types.h>
 
 struct agp_version {
@@ -108,6 +107,5 @@ typedef struct _agp_unbind {
 	__u32 priority;		/* priority for paging out      */
 } agp_unbind;
 
-#endif				/* __KERNEL__ */
 
-#endif /* _UAPI_AGP_H */
+#endif /* _AGP_H */

@@ -1,10 +1,9 @@
 /* SPDX-License-Identifier: GPL-2.0 WITH Linux-syscall-note */
-#ifndef _UAPI_LINUX_FB_H
-#define _UAPI_LINUX_FB_H
+#ifndef _LINUX_FB_H
+#define _LINUX_FB_H
 
 #include <linux/types.h>
 #include <linux/i2c.h>
-#include <linux/vesa.h>
 
 /* Definitions of frame buffers						*/
 
@@ -18,9 +17,7 @@
 #define FBIOGETCMAP		0x4604
 #define FBIOPUTCMAP		0x4605
 #define FBIOPAN_DISPLAY		0x4606
-#ifndef __KERNEL__
 #define FBIO_CURSOR            _IOWR('F', 0x08, struct fb_cursor)
-#endif
 /* 0x4607-0x460B are defined below */
 /* #define FBIOGET_MONITORSPEC	0x460C */
 /* #define FBIOPUT_MONITORSPEC	0x460D */
@@ -294,6 +291,13 @@ struct fb_con2fbmap {
 	__u32 framebuffer;
 };
 
+/* VESA Blanking Levels */
+#define VESA_NO_BLANKING        0
+#define VESA_VSYNC_SUSPEND      1
+#define VESA_HSYNC_SUSPEND      2
+#define VESA_POWERDOWN          3
+
+
 enum {
 	/* screen: unblanked, hsync: on,  vsync: on */
 	FB_BLANK_UNBLANK       = VESA_NO_BLANKING,
@@ -393,4 +397,4 @@ struct fb_cursor {
 #define FB_BACKLIGHT_MAX	0xFF
 
 
-#endif /* _UAPI_LINUX_FB_H */
+#endif /* _LINUX_FB_H */

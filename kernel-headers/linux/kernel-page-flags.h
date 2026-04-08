@@ -1,13 +1,13 @@
 /* SPDX-License-Identifier: GPL-2.0 WITH Linux-syscall-note */
-#ifndef _UAPILINUX_KERNEL_PAGE_FLAGS_H
-#define _UAPILINUX_KERNEL_PAGE_FLAGS_H
+#ifndef LINUX_KERNEL_PAGE_FLAGS_H
+#define LINUX_KERNEL_PAGE_FLAGS_H
 
 /*
  * Stable page flag bits exported to user space
  */
 
 #define KPF_LOCKED		0
-#define KPF_ERROR		1	/* Now unused */
+#define KPF_ERROR		1
 #define KPF_REFERENCED		2
 #define KPF_UPTODATE		3
 #define KPF_DIRTY		4
@@ -37,4 +37,4 @@
 #define KPF_IDLE		25
 #define KPF_PGTABLE		26
 
-#endif /* _UAPILINUX_KERNEL_PAGE_FLAGS_H */
+#endif /* LINUX_KERNEL_PAGE_FLAGS_H */

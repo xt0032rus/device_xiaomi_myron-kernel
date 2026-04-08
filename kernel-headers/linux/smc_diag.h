@@ -1,6 +1,6 @@
 /* SPDX-License-Identifier: GPL-2.0 WITH Linux-syscall-note */
-#ifndef _UAPI_SMC_DIAG_H_
-#define _UAPI_SMC_DIAG_H_
+#ifndef _SMC_DIAG_H_
+#define _SMC_DIAG_H_
 
 #include <linux/types.h>
 #include <linux/inet_diag.h>
@@ -107,8 +107,6 @@ struct smcd_diag_dmbinfo {		/* SMC-D Socket internals */
 	__aligned_u64	my_gid;		/* My GID */
 	__aligned_u64	token;		/* Token of DMB */
 	__aligned_u64	peer_token;	/* Token of remote DMBE */
-	__aligned_u64	peer_gid_ext;	/* Peer GID (extended part) */
-	__aligned_u64	my_gid_ext;	/* My GID (extended part) */
 };
 
-#endif /* _UAPI_SMC_DIAG_H_ */
+#endif /* _SMC_DIAG_H_ */

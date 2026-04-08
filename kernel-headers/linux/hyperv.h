@@ -23,8 +23,8 @@
  *
  */
 
-#ifndef _UAPI_HYPERV_H
-#define _UAPI_HYPERV_H
+#ifndef _HYPERV_H
+#define _HYPERV_H
 
 #include <linux/types.h>
 
@@ -408,4 +408,4 @@ struct hv_kvp_ip_msg {
 	struct hv_kvp_ipaddr_value      kvp_ip_val;
 } __attribute__((packed));
 
-#endif /* _UAPI_HYPERV_H */
+#endif /* _HYPERV_H */

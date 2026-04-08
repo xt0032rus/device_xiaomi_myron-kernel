@@ -1,6 +1,6 @@
 /* SPDX-License-Identifier: GPL-2.0 WITH Linux-syscall-note */
-#ifndef _UAPI_LWTUNNEL_H_
-#define _UAPI_LWTUNNEL_H_
+#ifndef _LWTUNNEL_H_
+#define _LWTUNNEL_H_
 
 #include <linux/types.h>
 
@@ -121,4 +121,4 @@ enum {
 
 #define LWT_XFRM_MAX (__LWT_XFRM_MAX - 1)
 
-#endif /* _UAPI_LWTUNNEL_H_ */
+#endif /* _LWTUNNEL_H_ */

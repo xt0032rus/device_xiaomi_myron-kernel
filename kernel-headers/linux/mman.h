@@ -1,6 +1,6 @@
 /* SPDX-License-Identifier: GPL-2.0 WITH Linux-syscall-note */
-#ifndef _UAPI_LINUX_MMAN_H
-#define _UAPI_LINUX_MMAN_H
+#ifndef _LINUX_MMAN_H
+#define _LINUX_MMAN_H
 
 #include <asm/mman.h>
 #include <asm-generic/hugetlb_encode.h>
@@ -17,7 +17,6 @@
 #define MAP_SHARED	0x01		/* Share changes */
 #define MAP_PRIVATE	0x02		/* Changes are private */
 #define MAP_SHARED_VALIDATE 0x03	/* share + validate extension flags */
-#define MAP_DROPPABLE	0x08		/* Zero memory under memory pressure. */
 
 /*
  * Huge page size encoding when MAP_HUGETLB is specified, and a huge page
@@ -56,4 +55,4 @@ struct cachestat {
 	__u64 nr_recently_evicted;
 };
 
-#endif /* _UAPI_LINUX_MMAN_H */
+#endif /* _LINUX_MMAN_H */

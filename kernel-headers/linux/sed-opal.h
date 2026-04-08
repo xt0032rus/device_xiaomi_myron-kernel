@@ -7,8 +7,8 @@
  *    Scott  Bauer      <scott.bauer@intel.com>
  */
 
-#ifndef _UAPI_SED_OPAL_H
-#define _UAPI_SED_OPAL_H
+#ifndef _SED_OPAL_H
+#define _SED_OPAL_H
 
 #include <linux/types.h>
 
@@ -216,4 +216,4 @@ struct opal_revert_lsp {
 #define IOC_OPAL_DISCOVERY          _IOW('p', 239, struct opal_discovery)
 #define IOC_OPAL_REVERT_LSP         _IOW('p', 240, struct opal_revert_lsp)
 
-#endif /* _UAPI_SED_OPAL_H */
+#endif /* _SED_OPAL_H */

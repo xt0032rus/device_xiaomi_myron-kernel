@@ -56,7 +56,6 @@
  */
 #define TEE_IMPL_ID_OPTEE	1
 #define TEE_IMPL_ID_AMDTEE	2
-#define TEE_IMPL_ID_TSTEE	3
 
 /*
  * OP-TEE specific capabilities
@@ -120,7 +119,7 @@ struct tee_ioctl_shm_alloc_data {
 
 /**
  * struct tee_ioctl_buf_data - Variable sized buffer
- * @buf_ptr:	[in] A __user pointer to a buffer
+ * @buf_ptr:	[in] A pointer to a buffer
  * @buf_len:	[in] Length of the buffer above
  *
  * Used as argument for TEE_IOC_OPEN_SESSION, TEE_IOC_INVOKE,

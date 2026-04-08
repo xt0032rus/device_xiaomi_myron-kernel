@@ -3,8 +3,8 @@
  * ioctl interface for the scsi media changer driver
  */
 
-#ifndef _UAPI_LINUX_CHIO_H
-#define _UAPI_LINUX_CHIO_H
+#ifndef _LINUX_CHIO_H
+#define _LINUX_CHIO_H
 
 /* changer element types */
 #define CHET_MT   0	/* media transport element (robot) */
@@ -100,7 +100,7 @@ struct changer_position {
  */
 struct changer_element_status {
 	int             ces_type;
-	unsigned char   __user *ces_data;
+	unsigned char   *ces_data;
 };
 #define CESTATUS_FULL     0x01 /* full */
 #define CESTATUS_IMPEXP   0x02	/* media was imported (inserted by sysop) */
@@ -163,4 +163,4 @@ struct changer_set_voltag {
 #define CHIOSVOLTAG    _IOW('c',18,struct changer_set_voltag)
 #define CHIOGVPARAMS   _IOR('c',19,struct changer_vendor_params)
 
-#endif /* _UAPI_LINUX_CHIO_H */
+#endif /* _LINUX_CHIO_H */

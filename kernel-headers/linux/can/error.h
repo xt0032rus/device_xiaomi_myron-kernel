@@ -42,8 +42,8 @@
  * DAMAGE.
  */
 
-#ifndef _UAPI_CAN_ERROR_H
-#define _UAPI_CAN_ERROR_H
+#ifndef _CAN_ERROR_H
+#define _CAN_ERROR_H
 
 #define CAN_ERR_DLC 8 /* dlc for error message frames */
 
@@ -140,4 +140,4 @@
 #define CAN_ERROR_PASSIVE_THRESHOLD 128
 #define CAN_BUS_OFF_THRESHOLD 256
 
-#endif /* _UAPI_CAN_ERROR_H */
+#endif /* _CAN_ERROR_H */

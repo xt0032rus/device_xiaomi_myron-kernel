@@ -854,7 +854,7 @@ struct dtv_stats {
 	union {
 		__u64 uvalue;	/* for counters and relative scales */
 		__s64 svalue;	/* for 0.001 dB measures */
-	}  __attribute__ ((packed));
+	};
 } __attribute__ ((packed));
 
 
@@ -959,7 +959,6 @@ struct dtv_properties {
 #define FE_SET_PROPERTY		   _IOW('o', 82, struct dtv_properties)
 #define FE_GET_PROPERTY		   _IOR('o', 83, struct dtv_properties)
 
-#if defined(__DVB_CORE__) || !defined(__KERNEL__)
 
 /*
  * DEPRECATED: Everything below is deprecated in favor of DVBv5 API
@@ -1055,6 +1054,5 @@ struct dvb_frontend_event {
 #define FE_SET_FRONTEND		   _IOW('o', 76, struct dvb_frontend_parameters)
 #define FE_GET_FRONTEND		   _IOR('o', 77, struct dvb_frontend_parameters)
 
-#endif
 
 #endif /*_DVBFRONTEND_H_*/

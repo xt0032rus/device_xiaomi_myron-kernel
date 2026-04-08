@@ -12,8 +12,8 @@
 
 #include <linux/libc-compat.h>
 
-#ifndef _UAPI_LINUX_XATTR_H
-#define _UAPI_LINUX_XATTR_H
+#ifndef _LINUX_XATTR_H
+#define _LINUX_XATTR_H
 
 #if __UAPI_DEF_XATTR
 #define __USE_KERNEL_XATTR_DEFS
@@ -82,4 +82,4 @@
 #define XATTR_NAME_POSIX_ACL_DEFAULT XATTR_SYSTEM_PREFIX XATTR_POSIX_ACL_DEFAULT
 
 
-#endif /* _UAPI_LINUX_XATTR_H */
+#endif /* _LINUX_XATTR_H */

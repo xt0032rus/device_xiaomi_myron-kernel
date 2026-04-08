@@ -1,6 +1,6 @@
 /* SPDX-License-Identifier: GPL-2.0+ WITH Linux-syscall-note */
-#ifndef _UAPI_HISI_QM_H
-#define _UAPI_HISI_QM_H
+#ifndef _HISI_QM_H
+#define _HISI_QM_H
 
 #include <linux/types.h>
 

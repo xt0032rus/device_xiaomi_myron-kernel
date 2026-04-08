@@ -6,8 +6,8 @@
  * Copyright (C) 1996, 1999, 2001 David S. Miller (davem@redhat.com)
  */
 
-#ifndef _UAPI__LINUX_MII_H__
-#define _UAPI__LINUX_MII_H__
+#ifndef __LINUX_MII_H__
+#define __LINUX_MII_H__
 
 #include <linux/types.h>
 #include <linux/ethtool.h>
@@ -182,4 +182,4 @@ struct mii_ioctl_data {
 	__u16		val_out;
 };
 
-#endif /* _UAPI__LINUX_MII_H__ */
+#endif /* __LINUX_MII_H__ */

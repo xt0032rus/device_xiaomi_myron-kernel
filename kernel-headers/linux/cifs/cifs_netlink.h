@@ -6,8 +6,8 @@
  */
 
 
-#ifndef _UAPILINUX_CIFS_NETLINK_H
-#define _UAPILINUX_CIFS_NETLINK_H
+#ifndef LINUX_CIFS_NETLINK_H
+#define LINUX_CIFS_NETLINK_H
 
 #define CIFS_GENL_NAME			"cifs"
 #define CIFS_GENL_VERSION		0x1
@@ -60,4 +60,4 @@ enum cifs_swn_resource_state {
 	CIFS_SWN_RESOURCE_STATE_UNAVAILABLE = 0xFF
 };
 
-#endif /* _UAPILINUX_CIFS_NETLINK_H */
+#endif /* LINUX_CIFS_NETLINK_H */

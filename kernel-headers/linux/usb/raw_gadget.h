@@ -5,8 +5,8 @@
  * See Documentation/usb/raw-gadget.rst for more details.
  */
 
-#ifndef _UAPI__LINUX_USB_RAW_GADGET_H
-#define _UAPI__LINUX_USB_RAW_GADGET_H
+#ifndef __LINUX_USB_RAW_GADGET_H
+#define __LINUX_USB_RAW_GADGET_H
 
 #include <asm/ioctl.h>
 #include <linux/types.h>
@@ -44,16 +44,6 @@ enum usb_raw_event_type {
 	/* This event is queued when a new control request arrived to ep0. */
 	USB_RAW_EVENT_CONTROL = 2,
 
-	/*
-	 * These events are queued when the gadget driver is suspended,
-	 * resumed, reset, or disconnected. Note that some UDCs (e.g. dwc2)
-	 * report a disconnect event instead of a reset.
-	 */
-	USB_RAW_EVENT_SUSPEND = 3,
-	USB_RAW_EVENT_RESUME = 4,
-	USB_RAW_EVENT_RESET = 5,
-	USB_RAW_EVENT_DISCONNECT = 6,
-
 	/* The list might grow in the future. */
 };
 
@@ -64,8 +54,8 @@ enum usb_raw_event_type {
  *     actual length of the fetched event data.
  * @data: A buffer to store the fetched event data.
  *
- * The fetched event data buffer contains struct usb_ctrlrequest for
- * USB_RAW_EVENT_CONTROL and is empty for other events.
+ * Currently the fetched data buffer is empty for USB_RAW_EVENT_CONNECT,
+ * and contains struct usb_ctrlrequest for USB_RAW_EVENT_CONTROL.
  */
 struct usb_raw_event {
 	__u32		type;
@@ -76,12 +66,12 @@ struct usb_raw_event {
 #define USB_RAW_IO_FLAGS_ZERO	0x0001
 #define USB_RAW_IO_FLAGS_MASK	0x0001
 
-static inline int usb_raw_io_flags_valid(__u16 flags)
+static __inline__ int usb_raw_io_flags_valid(__u16 flags)
 {
 	return (flags & ~USB_RAW_IO_FLAGS_MASK) == 0;
 }
 
-static inline int usb_raw_io_flags_zero(__u16 flags)
+static __inline__ int usb_raw_io_flags_zero(__u16 flags)
 {
 	return (flags & USB_RAW_IO_FLAGS_ZERO);
 }
@@ -256,4 +246,4 @@ struct usb_raw_eps_info {
 #define USB_RAW_IOCTL_EP_CLEAR_HALT	_IOW('U', 14, __u32)
 #define USB_RAW_IOCTL_EP_SET_WEDGE	_IOW('U', 15, __u32)
 
-#endif /* _UAPI__LINUX_USB_RAW_GADGET_H */
+#endif /* __LINUX_USB_RAW_GADGET_H */

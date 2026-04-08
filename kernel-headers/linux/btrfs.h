@@ -17,8 +17,8 @@
  * Boston, MA 021110-1307, USA.
  */
 
-#ifndef _UAPI_LINUX_BTRFS_H
-#define _UAPI_LINUX_BTRFS_H
+#ifndef _LINUX_BTRFS_H
+#define _LINUX_BTRFS_H
 
 #ifdef __cplusplus
 extern "C" {
@@ -42,10 +42,8 @@ struct btrfs_ioctl_vol_args {
 #define BTRFS_DEVICE_PATH_NAME_MAX	1024
 #define BTRFS_SUBVOL_NAME_MAX 		4039
 
-#ifndef __KERNEL__
 /* Deprecated since 5.7 */
 # define BTRFS_SUBVOL_CREATE_ASYNC	(1ULL << 0)
-#endif
 #define BTRFS_SUBVOL_RDONLY		(1ULL << 1)
 #define BTRFS_SUBVOL_QGROUP_INHERIT	(1ULL << 2)
 
@@ -92,7 +90,6 @@ struct btrfs_qgroup_limit {
  * struct btrfs_qgroup_inherit.flags
  */
 #define BTRFS_QGROUP_INHERIT_SET_LIMITS	(1ULL << 0)
-#define BTRFS_QGROUP_INHERIT_FLAGS_SUPP (BTRFS_QGROUP_INHERIT_SET_LIMITS)
 
 struct btrfs_qgroup_inherit {
 	__u64	flags;
@@ -139,7 +136,7 @@ struct btrfs_ioctl_vol_args_v2 {
 	union {
 		struct {
 			__u64 size;
-			struct btrfs_qgroup_inherit __user *qgroup_inherit;
+			struct btrfs_qgroup_inherit *qgroup_inherit;
 		};
 		__u64 unused[4];
 	};
@@ -334,8 +331,6 @@ struct btrfs_ioctl_fs_info_args {
 #define BTRFS_FEATURE_INCOMPAT_RAID1C34		(1ULL << 11)
 #define BTRFS_FEATURE_INCOMPAT_ZONED		(1ULL << 12)
 #define BTRFS_FEATURE_INCOMPAT_EXTENT_TREE_V2	(1ULL << 13)
-#define BTRFS_FEATURE_INCOMPAT_RAID_STRIPE_TREE	(1ULL << 14)
-#define BTRFS_FEATURE_INCOMPAT_SIMPLE_QUOTA	(1ULL << 16)
 
 struct btrfs_ioctl_feature_flags {
 	__u64 compat_flags;
@@ -759,7 +754,6 @@ struct btrfs_ioctl_get_dev_stats {
 #define BTRFS_QUOTA_CTL_ENABLE	1
 #define BTRFS_QUOTA_CTL_DISABLE	2
 #define BTRFS_QUOTA_CTL_RESCAN__NOTUSED	3
-#define BTRFS_QUOTA_CTL_ENABLE_SIMPLE_QUOTA 4
 struct btrfs_ioctl_quota_ctl_args {
 	__u64 cmd;
 	__u64 status;
@@ -838,7 +832,7 @@ struct btrfs_ioctl_received_subvol_args {
 struct btrfs_ioctl_send_args {
 	__s64 send_fd;			/* in */
 	__u64 clone_sources_count;	/* in */
-	__u64 __user *clone_sources;	/* in */
+	__u64 *clone_sources;	/* in */
 	__u64 parent_root;		/* in */
 	__u64 flags;			/* in */
 	__u32 version;			/* in */
@@ -959,7 +953,7 @@ struct btrfs_ioctl_encoded_io_args {
 	 * increase in the future). This must also be less than or equal to
 	 * unencoded_len.
 	 */
-	const struct iovec __user *iov;
+	const struct iovec *iov;
 	/* Number of iovecs. */
 	unsigned long iovcnt;
 	/*
@@ -1186,4 +1180,4 @@ enum btrfs_err_code {
 }
 #endif
 
-#endif /* _UAPI_LINUX_BTRFS_H */
+#endif /* _LINUX_BTRFS_H */

@@ -1,6 +1,6 @@
 /* SPDX-License-Identifier: GPL-2.0 WITH Linux-syscall-note */
-#ifndef _UAPI_LINUX_AUXVEC_H
-#define _UAPI_LINUX_AUXVEC_H
+#ifndef _LINUX_AUXVEC_H
+#define _LINUX_AUXVEC_H
 
 #include <asm/auxvec.h>
 
@@ -32,8 +32,6 @@
 #define AT_HWCAP2 26	/* extension of AT_HWCAP */
 #define AT_RSEQ_FEATURE_SIZE	27	/* rseq supported feature size */
 #define AT_RSEQ_ALIGN		28	/* rseq allocation alignment */
-#define AT_HWCAP3 29	/* extension of AT_HWCAP */
-#define AT_HWCAP4 30	/* extension of AT_HWCAP */
 
 #define AT_EXECFN  31	/* filename of program */
 
@@ -41,4 +39,4 @@
 #define AT_MINSIGSTKSZ	51	/* minimal stack size for signal delivery */
 #endif
 
-#endif /* _UAPI_LINUX_AUXVEC_H */
+#endif /* _LINUX_AUXVEC_H */

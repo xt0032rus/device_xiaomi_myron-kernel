@@ -1,7 +1,7 @@
 /* SPDX-License-Identifier: GPL-2.0 WITH Linux-syscall-note */
 
-#ifndef _UAPI_LINUX_EXT4_H
-#define _UAPI_LINUX_EXT4_H
+#ifndef _LINUX_EXT4_H
+#define _LINUX_EXT4_H
 #include <linux/fiemap.h>
 #include <linux/fs.h>
 #include <linux/ioctl.h>
@@ -114,4 +114,4 @@ struct ext4_new_group_input {
  */
 #define EXT4_FIEMAP_EXTENT_HOLE		0x08000000
 
-#endif /* _UAPI_LINUX_EXT4_H */
+#endif /* _LINUX_EXT4_H */

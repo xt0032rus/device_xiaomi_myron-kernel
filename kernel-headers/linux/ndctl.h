@@ -18,38 +18,38 @@
 struct nd_cmd_dimm_flags {
 	__u32 status;
 	__u32 flags;
-} __packed;
+} __attribute__((packed));
 
 struct nd_cmd_get_config_size {
 	__u32 status;
 	__u32 config_size;
 	__u32 max_xfer;
-} __packed;
+} __attribute__((packed));
 
 struct nd_cmd_get_config_data_hdr {
 	__u32 in_offset;
 	__u32 in_length;
 	__u32 status;
 	__u8 out_buf[];
-} __packed;
+} __attribute__((packed));
 
 struct nd_cmd_set_config_hdr {
 	__u32 in_offset;
 	__u32 in_length;
 	__u8 in_buf[];
-} __packed;
+} __attribute__((packed));
 
 struct nd_cmd_vendor_hdr {
 	__u32 opcode;
 	__u32 in_length;
 	__u8 in_buf[];
-} __packed;
+} __attribute__((packed));
 
 struct nd_cmd_vendor_tail {
 	__u32 status;
 	__u32 out_length;
 	__u8 out_buf[];
-} __packed;
+} __attribute__((packed));
 
 struct nd_cmd_ars_cap {
 	__u64 address;
@@ -59,7 +59,7 @@ struct nd_cmd_ars_cap {
 	__u32 clear_err_unit;
 	__u16 flags;
 	__u16 reserved;
-} __packed;
+} __attribute__((packed));
 
 struct nd_cmd_ars_start {
 	__u64 address;
@@ -69,7 +69,7 @@ struct nd_cmd_ars_start {
 	__u8 reserved[5];
 	__u32 status;
 	__u32 scrub_time;
-} __packed;
+} __attribute__((packed));
 
 struct nd_cmd_ars_status {
 	__u32 status;
@@ -86,8 +86,8 @@ struct nd_cmd_ars_status {
 		__u32 reserved;
 		__u64 err_address;
 		__u64 length;
-	} __packed records[];
-} __packed;
+	} __attribute__((packed)) records[];
+} __attribute__((packed));
 
 struct nd_cmd_clear_error {
 	__u64 address;
@@ -95,7 +95,7 @@ struct nd_cmd_clear_error {
 	__u32 status;
 	__u8 reserved[4];
 	__u64 cleared;
-} __packed;
+} __attribute__((packed));
 
 enum {
 	ND_CMD_IMPLEMENTED = 0,
@@ -126,7 +126,7 @@ enum {
 	ND_CONFIG_LOCKED = 1,
 };
 
-static inline const char *nvdimm_bus_cmd_name(unsigned cmd)
+static __inline__ const char *nvdimm_bus_cmd_name(unsigned cmd)
 {
 	switch (cmd) {
 	case ND_CMD_ARS_CAP:		return "ars_cap";
@@ -138,7 +138,7 @@ static inline const char *nvdimm_bus_cmd_name(unsigned cmd)
 	}
 }
 
-static inline const char *nvdimm_cmd_name(unsigned cmd)
+static __inline__ const char *nvdimm_cmd_name(unsigned cmd)
 {
 	switch (cmd) {
 	case ND_CMD_SMART:			return "smart";

@@ -4,7 +4,6 @@
 
 #include <linux/types.h>
 
-#ifndef __KERNEL__
 /* Old nfnetlink macros for userspace */
 
 /* nfnetlink groups: Up to 32 maximum */
@@ -60,5 +59,4 @@ struct nfattr {
         + NLMSG_ALIGN(sizeof(struct nfgenmsg))))
 #define NFM_PAYLOAD(n)  NLMSG_PAYLOAD(n, sizeof(struct nfgenmsg))
 
-#endif /* ! __KERNEL__ */
 #endif /* _NFNETLINK_COMPAT_H */

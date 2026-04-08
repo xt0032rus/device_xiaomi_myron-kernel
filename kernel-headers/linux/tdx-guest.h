@@ -5,8 +5,8 @@
  * Copyright (C) 2022 Intel Corporation
  */
 
-#ifndef _UAPI_LINUX_TDX_GUEST_H_
-#define _UAPI_LINUX_TDX_GUEST_H_
+#ifndef _LINUX_TDX_GUEST_H_
+#define _LINUX_TDX_GUEST_H_
 
 #include <linux/ioctl.h>
 #include <linux/types.h>
@@ -39,4 +39,4 @@ struct tdx_report_req {
  */
 #define TDX_CMD_GET_REPORT0              _IOWR('T', 1, struct tdx_report_req)
 
-#endif /* _UAPI_LINUX_TDX_GUEST_H_ */
+#endif /* _LINUX_TDX_GUEST_H_ */

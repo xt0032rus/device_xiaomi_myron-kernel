@@ -1,6 +1,6 @@
 /* SPDX-License-Identifier: GPL-2.0 WITH Linux-syscall-note */
-#ifndef _UAPI__LINUX_RTNETLINK_H
-#define _UAPI__LINUX_RTNETLINK_H
+#ifndef __LINUX_RTNETLINK_H
+#define __LINUX_RTNETLINK_H
 
 #include <linux/types.h>
 #include <linux/netlink.h>
@@ -502,17 +502,13 @@ enum {
 
 #define RTAX_MAX (__RTAX_MAX - 1)
 
-#define RTAX_FEATURE_ECN		(1 << 0)
-#define RTAX_FEATURE_SACK		(1 << 1) /* unused */
-#define RTAX_FEATURE_TIMESTAMP		(1 << 2) /* unused */
-#define RTAX_FEATURE_ALLFRAG		(1 << 3) /* unused */
-#define RTAX_FEATURE_TCP_USEC_TS	(1 << 4)
+#define RTAX_FEATURE_ECN	(1 << 0)
+#define RTAX_FEATURE_SACK	(1 << 1)
+#define RTAX_FEATURE_TIMESTAMP	(1 << 2)
+#define RTAX_FEATURE_ALLFRAG	(1 << 3)
 
-#define RTAX_FEATURE_MASK	(RTAX_FEATURE_ECN |		\
-				 RTAX_FEATURE_SACK |		\
-				 RTAX_FEATURE_TIMESTAMP |	\
-				 RTAX_FEATURE_ALLFRAG |		\
-				 RTAX_FEATURE_TCP_USEC_TS)
+#define RTAX_FEATURE_MASK	(RTAX_FEATURE_ECN | RTAX_FEATURE_SACK | \
+				 RTAX_FEATURE_TIMESTAMP | RTAX_FEATURE_ALLFRAG)
 
 struct rta_session {
 	__u8	proto;
@@ -677,7 +673,6 @@ enum {
 
 #define NDUSEROPT_MAX	(__NDUSEROPT_MAX - 1)
 
-#ifndef __KERNEL__
 /* RTnetlink multicast groups - backwards compatibility for userspace */
 #define RTMGRP_LINK		1
 #define RTMGRP_NOTIFY		2
@@ -698,7 +693,6 @@ enum {
 #define RTMGRP_DECnet_ROUTE     0x4000
 
 #define RTMGRP_IPV6_PREFIX	0x20000
-#endif
 
 /* RTnetlink multicast groups */
 enum rtnetlink_groups {
@@ -829,4 +823,4 @@ enum {
 
 
 
-#endif /* _UAPI__LINUX_RTNETLINK_H */
+#endif /* __LINUX_RTNETLINK_H */

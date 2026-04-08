@@ -1,5 +1,5 @@
-#ifndef _UAPI_LINUX_VIRTIO_CONFIG_H
-#define _UAPI_LINUX_VIRTIO_CONFIG_H
+#ifndef _LINUX_VIRTIO_CONFIG_H
+#define _LINUX_VIRTIO_CONFIG_H
 /* This header, excluding the #ifdef __KERNEL__ part, is BSD licensed so
  * anyone can use the definitions to implement compatible drivers/servers.
  *
@@ -52,7 +52,7 @@
  * rest are per-device feature bits.
  */
 #define VIRTIO_TRANSPORT_F_START	28
-#define VIRTIO_TRANSPORT_F_END		42
+#define VIRTIO_TRANSPORT_F_END		41
 
 #ifndef VIRTIO_CONFIG_NO_LEGACY
 /* Do we get callbacks when the ring is completely used, even if we've
@@ -74,10 +74,8 @@
  * this is for compatibility with legacy systems.
  */
 #define VIRTIO_F_ACCESS_PLATFORM	33
-#ifndef __KERNEL__
 /* Legacy name for VIRTIO_F_ACCESS_PLATFORM (for compatibility with old userspace) */
 #define VIRTIO_F_IOMMU_PLATFORM		VIRTIO_F_ACCESS_PLATFORM
-#endif /* __KERNEL__ */
 
 /* This feature indicates support for the packed virtqueue layout. */
 #define VIRTIO_F_RING_PACKED		34
@@ -105,19 +103,8 @@
  */
 #define VIRTIO_F_NOTIFICATION_DATA	38
 
-/* This feature indicates that the driver uses the data provided by the device
- * as a virtqueue identifier in available buffer notifications.
- */
-#define VIRTIO_F_NOTIF_CONFIG_DATA	39
-
 /*
  * This feature indicates that the driver can reset a queue individually.
  */
 #define VIRTIO_F_RING_RESET		40
-
-/*
- * This feature indicates that the device support administration virtqueues.
- */
-#define VIRTIO_F_ADMIN_VQ		41
-
-#endif /* _UAPI_LINUX_VIRTIO_CONFIG_H */
+#endif /* _LINUX_VIRTIO_CONFIG_H */

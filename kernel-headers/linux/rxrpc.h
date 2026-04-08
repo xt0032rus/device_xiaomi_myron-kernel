@@ -5,8 +5,8 @@
  * Written by David Howells (dhowells@redhat.com)
  */
 
-#ifndef _UAPI_LINUX_RXRPC_H
-#define _UAPI_LINUX_RXRPC_H
+#ifndef _LINUX_RXRPC_H
+#define _LINUX_RXRPC_H
 
 #include <linux/types.h>
 #include <linux/in.h>
@@ -118,4 +118,4 @@ enum rxrpc_cmsg_type {
 #define RXKADDATALEN		19270411	/* user data too long */
 #define RXKADILLEGALLEVEL	19270412	/* caller not authorised to use encrypted conns */
 
-#endif /* _UAPI_LINUX_RXRPC_H */
+#endif /* _LINUX_RXRPC_H */

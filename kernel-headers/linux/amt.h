@@ -2,8 +2,8 @@
 /*
  * Copyright (c) 2021 Taehee Yoo <ap420073@gmail.com>
  */
-#ifndef _UAPI_AMT_H_
-#define _UAPI_AMT_H_
+#ifndef _AMT_H_
+#define _AMT_H_
 
 enum ifla_amt_mode {
 	/* AMT interface works as Gateway mode.
@@ -59,4 +59,4 @@ enum {
 
 #define IFLA_AMT_MAX (__IFLA_AMT_MAX - 1)
 
-#endif /* _UAPI_AMT_H_ */
+#endif /* _AMT_H_ */

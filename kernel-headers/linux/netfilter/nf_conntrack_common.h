@@ -1,6 +1,6 @@
 /* SPDX-License-Identifier: GPL-2.0 WITH Linux-syscall-note */
-#ifndef _UAPI_NF_CONNTRACK_COMMON_H
-#define _UAPI_NF_CONNTRACK_COMMON_H
+#ifndef _NF_CONNTRACK_COMMON_H
+#define _NF_CONNTRACK_COMMON_H
 /* Connection state tracking for netfilter.  This is separated from,
    but required by, the NAT layer; it can also be used by an iptables
    extension. */
@@ -27,11 +27,7 @@ enum ip_conntrack_info {
 	IP_CT_NUMBER,
 
 	/* only for userspace compatibility */
-#ifndef __KERNEL__
 	IP_CT_NEW_REPLY = IP_CT_NUMBER,
-#else
-	IP_CT_UNTRACKED = 7,
-#endif
 };
 
 #define NF_CT_STATE_INVALID_BIT			(1 << 0)
@@ -97,14 +93,6 @@ enum ip_conntrack_status {
 	IPS_UNTRACKED_BIT = 12,
 	IPS_UNTRACKED = (1 << IPS_UNTRACKED_BIT),
 
-#ifdef __KERNEL__
-	/* Re-purposed for in-kernel use:
-	 * Tags a conntrack entry that clashed with an existing entry
-	 * on insert.
-	 */
-	IPS_NAT_CLASH_BIT = IPS_UNTRACKED_BIT,
-	IPS_NAT_CLASH = IPS_UNTRACKED,
-#endif
 
 	/* Conntrack got a helper explicitly attached (ruleset, ctnetlink). */
 	IPS_HELPER_BIT = 13,
@@ -144,9 +132,6 @@ enum ip_conntrack_events {
 	IPCT_SECMARK,		/* new security mark has been set */
 	IPCT_LABEL,		/* new connlabel has been set */
 	IPCT_SYNPROXY,		/* synproxy has been set */
-#ifdef __KERNEL__
-	__IPCT_MAX
-#endif
 };
 
 enum ip_conntrack_expect_events {
@@ -160,4 +145,4 @@ enum ip_conntrack_expect_events {
 #define NF_CT_EXPECT_USERSPACE		0x4
 
 
-#endif /* _UAPI_NF_CONNTRACK_COMMON_H */
+#endif /* _NF_CONNTRACK_COMMON_H */

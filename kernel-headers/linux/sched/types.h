@@ -1,6 +1,6 @@
 /* SPDX-License-Identifier: GPL-2.0 WITH Linux-syscall-note */
-#ifndef _UAPI_LINUX_SCHED_TYPES_H
-#define _UAPI_LINUX_SCHED_TYPES_H
+#ifndef _LINUX_SCHED_TYPES_H
+#define _LINUX_SCHED_TYPES_H
 
 #include <linux/types.h>
 
@@ -58,9 +58,9 @@
  *
  * This is reflected by the following fields of the sched_attr structure:
  *
- *  @sched_deadline	representative of the task's deadline in nanoseconds
- *  @sched_runtime	representative of the task's runtime in nanoseconds
- *  @sched_period	representative of the task's period in nanoseconds
+ *  @sched_deadline	representative of the task's deadline
+ *  @sched_runtime	representative of the task's runtime
+ *  @sched_period	representative of the task's period
  *
  * Given this task model, there are a multiplicity of scheduling algorithms
  * and policies, that can be used to ensure all the tasks will make their
@@ -118,4 +118,4 @@ struct sched_attr {
 
 };
 
-#endif /* _UAPI_LINUX_SCHED_TYPES_H */
+#endif /* _LINUX_SCHED_TYPES_H */

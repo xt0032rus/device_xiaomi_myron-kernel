@@ -119,16 +119,6 @@ struct rxe_send_wr {
 			__u32		access;
 		} mw;
 		/* reg is only used by the kernel and is not part of the uapi */
-#ifdef __KERNEL__
-		struct {
-			union {
-				struct ib_mr *mr;
-				__aligned_u64 reserved;
-			};
-			__u32	     key;
-			__u32	     access;
-		} reg;
-#endif
 	} wr;
 };
 

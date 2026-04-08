@@ -20,8 +20,8 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
-#ifndef _UAPI__CONNECTOR_H
-#define _UAPI__CONNECTOR_H
+#ifndef __CONNECTOR_H
+#define __CONNECTOR_H
 
 #include <linux/types.h>
 
@@ -78,4 +78,4 @@ struct cn_msg {
 	__u8 data[];
 };
 
-#endif /* _UAPI__CONNECTOR_H */
+#endif /* __CONNECTOR_H */

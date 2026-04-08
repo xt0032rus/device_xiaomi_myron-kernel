@@ -6,8 +6,8 @@
  * under the terms of the GNU General Public License version 2 as published by
  * the Free Software Foundation.
  */
-#ifndef _UAPI_SERIO_H
-#define _UAPI_SERIO_H
+#ifndef _SERIO_H
+#define _SERIO_H
 
 #include <linux/const.h>
 #include <linux/ioctl.h>
@@ -83,6 +83,5 @@
 #define SERIO_PULSE8_CEC	0x40
 #define SERIO_RAINSHADOW_CEC	0x41
 #define SERIO_FSIA6B	0x42
-#define SERIO_EXTRON_DA_HD_4K_PLUS	0x43
 
-#endif /* _UAPI_SERIO_H */
+#endif /* _SERIO_H */

@@ -1,6 +1,6 @@
 /* SPDX-License-Identifier: GPL-2.0 WITH Linux-syscall-note */
-#ifndef _UAPI__IP_SET_BITMAP_H
-#define _UAPI__IP_SET_BITMAP_H
+#ifndef __IP_SET_BITMAP_H
+#define __IP_SET_BITMAP_H
 
 #include <linux/netfilter/ipset/ip_set.h>
 
@@ -13,4 +13,4 @@ enum {
 };
 
 
-#endif /* _UAPI__IP_SET_BITMAP_H */
+#endif /* __IP_SET_BITMAP_H */

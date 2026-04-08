@@ -3,8 +3,8 @@
  * Copyright (c) 2022, Ampere Computing LLC.
  */
 
-#ifndef _UAPI_LINUX_IPMI_SSIF_BMC_H
-#define _UAPI_LINUX_IPMI_SSIF_BMC_H
+#ifndef _LINUX_IPMI_SSIF_BMC_H
+#define _LINUX_IPMI_SSIF_BMC_H
 
 #include <linux/types.h>
 
@@ -15,4 +15,4 @@ struct ipmi_ssif_msg {
 	__u8    payload[IPMI_SSIF_PAYLOAD_MAX];
 };
 
-#endif /* _UAPI_LINUX_IPMI_SSIF_BMC_H */
+#endif /* _LINUX_IPMI_SSIF_BMC_H */

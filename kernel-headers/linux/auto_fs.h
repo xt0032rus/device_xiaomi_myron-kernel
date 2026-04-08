@@ -10,20 +10,18 @@
  *
  * ----------------------------------------------------------------------- */
 
-#ifndef _UAPI_LINUX_AUTO_FS_H
-#define _UAPI_LINUX_AUTO_FS_H
+#ifndef _LINUX_AUTO_FS_H
+#define _LINUX_AUTO_FS_H
 
 #include <linux/types.h>
 #include <linux/limits.h>
-#ifndef __KERNEL__
 #include <sys/ioctl.h>
-#endif /* __KERNEL__ */
 
 #define AUTOFS_PROTO_VERSION		5
 #define AUTOFS_MIN_PROTO_VERSION	3
 #define AUTOFS_MAX_PROTO_VERSION	5
 
-#define AUTOFS_PROTO_SUBVERSION		6
+#define AUTOFS_PROTO_SUBVERSION		5
 
 /*
  * The wait_queue_token (autofs_wqt_t) is part of a structure which is passed
@@ -100,37 +98,37 @@ enum {
 #define AUTOFS_TYPE_DIRECT		2U
 #define AUTOFS_TYPE_OFFSET		4U
 
-static inline void set_autofs_type_indirect(unsigned int *type)
+static __inline__ void set_autofs_type_indirect(unsigned int *type)
 {
 	*type = AUTOFS_TYPE_INDIRECT;
 }
 
-static inline unsigned int autofs_type_indirect(unsigned int type)
+static __inline__ unsigned int autofs_type_indirect(unsigned int type)
 {
 	return (type == AUTOFS_TYPE_INDIRECT);
 }
 
-static inline void set_autofs_type_direct(unsigned int *type)
+static __inline__ void set_autofs_type_direct(unsigned int *type)
 {
 	*type = AUTOFS_TYPE_DIRECT;
 }
 
-static inline unsigned int autofs_type_direct(unsigned int type)
+static __inline__ unsigned int autofs_type_direct(unsigned int type)
 {
 	return (type == AUTOFS_TYPE_DIRECT);
 }
 
-static inline void set_autofs_type_offset(unsigned int *type)
+static __inline__ void set_autofs_type_offset(unsigned int *type)
 {
 	*type = AUTOFS_TYPE_OFFSET;
 }
 
-static inline unsigned int autofs_type_offset(unsigned int type)
+static __inline__ unsigned int autofs_type_offset(unsigned int type)
 {
 	return (type == AUTOFS_TYPE_OFFSET);
 }
 
-static inline unsigned int autofs_type_trigger(unsigned int type)
+static __inline__ unsigned int autofs_type_trigger(unsigned int type)
 {
 	return (type == AUTOFS_TYPE_DIRECT || type == AUTOFS_TYPE_OFFSET);
 }
@@ -140,12 +138,12 @@ static inline unsigned int autofs_type_trigger(unsigned int type)
  * indicate we want to search for "any" mount in the
  * autofs_dev_ioctl_ismountpoint() device ioctl function.
  */
-static inline void set_autofs_type_any(unsigned int *type)
+static __inline__ void set_autofs_type_any(unsigned int *type)
 {
 	*type = AUTOFS_TYPE_ANY;
 }
 
-static inline unsigned int autofs_type_any(unsigned int type)
+static __inline__ unsigned int autofs_type_any(unsigned int type)
 {
 	return (type == AUTOFS_TYPE_ANY);
 }
@@ -228,4 +226,4 @@ enum {
 #define AUTOFS_IOC_ASKUMOUNT		_IOR(AUTOFS_IOCTL, \
 					     AUTOFS_IOC_ASKUMOUNT_CMD, int)
 
-#endif /* _UAPI_LINUX_AUTO_FS_H */
+#endif /* _LINUX_AUTO_FS_H */

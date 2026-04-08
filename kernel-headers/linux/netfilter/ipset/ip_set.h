@@ -4,8 +4,8 @@
  *                         Martin Josefsson <gandalf@wlug.westbo.se>
  * Copyright (C) 2003-2011 Jozsef Kadlecsik <kadlec@netfilter.org>
  */
-#ifndef _UAPI_IP_SET_H
-#define _UAPI_IP_SET_H
+#ifndef _IP_SET_H
+#define _IP_SET_H
 
 #include <linux/types.h>
 
@@ -309,4 +309,4 @@ struct ip_set_req_version {
 	unsigned int version;
 };
 
-#endif /* _UAPI_IP_SET_H */
+#endif /* _IP_SET_H */

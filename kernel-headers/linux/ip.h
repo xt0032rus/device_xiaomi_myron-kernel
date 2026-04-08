@@ -15,8 +15,8 @@
  *		as published by the Free Software Foundation; either version
  *		2 of the License, or (at your option) any later version.
  */
-#ifndef _UAPI_LINUX_IP_H
-#define _UAPI_LINUX_IP_H
+#ifndef _LINUX_IP_H
+#define _LINUX_IP_H
 #include <linux/types.h>
 #include <linux/stddef.h>
 #include <asm/byteorder.h>
@@ -178,4 +178,4 @@ enum
 
 #define IPV4_DEVCONF_MAX (__IPV4_DEVCONF_MAX - 1)
 
-#endif /* _UAPI_LINUX_IP_H */
+#endif /* _LINUX_IP_H */

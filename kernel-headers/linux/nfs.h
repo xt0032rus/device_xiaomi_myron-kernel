@@ -5,8 +5,8 @@
  * This file contains constants mostly for Version 2 of the protocol,
  * but also has a couple of NFSv3 bits in (notably the error codes).
  */
-#ifndef _UAPI_LINUX_NFS_H
-#define _UAPI_LINUX_NFS_H
+#ifndef _LINUX_NFS_H
+#define _LINUX_NFS_H
 
 #include <linux/types.h>
 
@@ -61,6 +61,7 @@
 	NFSERR_NOSPC = 28,		/* v2 v3 v4 */
 	NFSERR_ROFS = 30,		/* v2 v3 v4 */
 	NFSERR_MLINK = 31,		/*    v3 v4 */
+	NFSERR_OPNOTSUPP = 45,		/* v2 v3 */
 	NFSERR_NAMETOOLONG = 63,	/* v2 v3 v4 */
 	NFSERR_NOTEMPTY = 66,		/* v2 v3 v4 */
 	NFSERR_DQUOT = 69,		/* v2 v3 v4 */
@@ -131,4 +132,4 @@ enum nfs_ftype {
 	NFFIFO = 8
 };
 
-#endif /* _UAPI_LINUX_NFS_H */
+#endif /* _LINUX_NFS_H */

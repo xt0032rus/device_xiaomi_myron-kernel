@@ -5,8 +5,8 @@
  * (C) 1996-1998 by Thomas Sailer, HB9JNX/AE4WA
  */
 
-#ifndef _UAPI_HDLCDRV_H
-#define _UAPI_HDLCDRV_H
+#ifndef _HDLCDRV_H
+#define _HDLCDRV_H
 
 /* -------------------------------------------------------------------- */
 /*
@@ -106,6 +106,6 @@ struct hdlcdrv_ioctl {
 
 /* -------------------------------------------------------------------- */
 
-#endif /* _UAPI_HDLCDRV_H */
+#endif /* _HDLCDRV_H */
 
 /* -------------------------------------------------------------------- */

@@ -3,8 +3,8 @@
  * CXL IOCTLs for Memory Devices
  */
 
-#ifndef _UAPI_CXL_MEM_H_
-#define _UAPI_CXL_MEM_H_
+#ifndef _CXL_MEM_H_
+#define _CXL_MEM_H_
 
 #include <linux/types.h>
 
@@ -46,10 +46,6 @@
 	___C(GET_SCAN_MEDIA_CAPS, "Get Scan Media Capabilities"),         \
 	___DEPRECATED(SCAN_MEDIA, "Scan Media"),                          \
 	___DEPRECATED(GET_SCAN_MEDIA, "Get Scan Media Results"),          \
-	___C(GET_TIMESTAMP, "Get Timestamp"),                             \
-	___C(GET_LOG_CAPS, "Get Log Capabilities"),			  \
-	___C(CLEAR_LOG, "Clear Log"),					  \
-	___C(GET_SUP_LOG_SUBLIST, "Get Supported Logs Sub-List"),	  \
 	___C(MAX, "invalid / last command")
 
 #define ___C(a, b) CXL_MEM_COMMAND_ID_##a
@@ -175,7 +171,7 @@ struct cxl_mem_query_commands {
 	__u32 n_commands;
 	__u32 rsvd;
 
-	struct cxl_command_info __user commands[]; /* out: supported commands */
+	struct cxl_command_info commands[]; /* out: supported commands */
 };
 
 /**

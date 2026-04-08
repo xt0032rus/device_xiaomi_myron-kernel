@@ -11,8 +11,8 @@
  *
  */
 
-#ifndef _UAPI_LINUX_HASH_INFO_H
-#define _UAPI_LINUX_HASH_INFO_H
+#ifndef _LINUX_HASH_INFO_H
+#define _LINUX_HASH_INFO_H
 
 enum hash_algo {
 	HASH_ALGO_MD4,
@@ -35,10 +35,7 @@ enum hash_algo {
 	HASH_ALGO_SM3_256,
 	HASH_ALGO_STREEBOG_256,
 	HASH_ALGO_STREEBOG_512,
-	HASH_ALGO_SHA3_256,
-	HASH_ALGO_SHA3_384,
-	HASH_ALGO_SHA3_512,
 	HASH_ALGO__LAST
 };
 
-#endif /* _UAPI_LINUX_HASH_INFO_H */
+#endif /* _LINUX_HASH_INFO_H */

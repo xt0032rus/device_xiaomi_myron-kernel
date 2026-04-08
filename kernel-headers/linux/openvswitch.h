@@ -18,8 +18,8 @@
  * 02110-1301, USA
  */
 
-#ifndef _UAPI__LINUX_OPENVSWITCH_H
-#define _UAPI__LINUX_OPENVSWITCH_H 1
+#ifndef __LINUX_OPENVSWITCH_H
+#define __LINUX_OPENVSWITCH_H 1
 
 #include <linux/types.h>
 #include <linux/if_ether.h>
@@ -649,8 +649,7 @@ enum ovs_flow_attr {
  * Actions are passed as nested attributes.
  *
  * Executes the specified actions with the given probability on a per-packet
- * basis. Nested actions will be able to access the probability value of the
- * parent @OVS_ACTION_ATTR_SAMPLE.
+ * basis.
  */
 enum ovs_sample_attr {
 	OVS_SAMPLE_ATTR_UNSPEC,
@@ -658,23 +657,10 @@ enum ovs_sample_attr {
 	OVS_SAMPLE_ATTR_ACTIONS,     /* Nested OVS_ACTION_ATTR_* attributes. */
 	__OVS_SAMPLE_ATTR_MAX,
 
-#ifdef __KERNEL__
-	OVS_SAMPLE_ATTR_ARG          /* struct sample_arg  */
-#endif
 };
 
 #define OVS_SAMPLE_ATTR_MAX (__OVS_SAMPLE_ATTR_MAX - 1)
 
-#ifdef __KERNEL__
-struct sample_arg {
-	bool exec;                   /* When true, actions in sample will not
-				      * change flow keys. False otherwise.
-				      */
-	u32  probability;            /* Same value as
-				      * 'OVS_SAMPLE_ATTR_PROBABILITY'.
-				      */
-};
-#endif
 
 /**
  * enum ovs_userspace_attr - Attributes for %OVS_ACTION_ATTR_USERSPACE action.
@@ -895,50 +881,10 @@ enum ovs_check_pkt_len_attr {
 	OVS_CHECK_PKT_LEN_ATTR_ACTIONS_IF_LESS_EQUAL,
 	__OVS_CHECK_PKT_LEN_ATTR_MAX,
 
-#ifdef __KERNEL__
-	OVS_CHECK_PKT_LEN_ATTR_ARG          /* struct check_pkt_len_arg  */
-#endif
 };
 
 #define OVS_CHECK_PKT_LEN_ATTR_MAX (__OVS_CHECK_PKT_LEN_ATTR_MAX - 1)
 
-#ifdef __KERNEL__
-struct check_pkt_len_arg {
-	u16 pkt_len;	/* Same value as OVS_CHECK_PKT_LEN_ATTR_PKT_LEN'. */
-	bool exec_for_greater;	/* When true, actions in IF_GREATER will
-				 * not change flow keys. False otherwise.
-				 */
-	bool exec_for_lesser_equal; /* When true, actions in IF_LESS_EQUAL
-				     * will not change flow keys. False
-				     * otherwise.
-				     */
-};
-#endif
-
-#define OVS_PSAMPLE_COOKIE_MAX_SIZE 16
-/**
- * enum ovs_psample_attr - Attributes for %OVS_ACTION_ATTR_PSAMPLE
- * action.
- *
- * @OVS_PSAMPLE_ATTR_GROUP: 32-bit number to identify the source of the
- * sample.
- * @OVS_PSAMPLE_ATTR_COOKIE: An optional variable-length binary cookie that
- * contains user-defined metadata. The maximum length is
- * OVS_PSAMPLE_COOKIE_MAX_SIZE bytes.
- *
- * Sends the packet to the psample multicast group with the specified group and
- * cookie. It is possible to combine this action with the
- * %OVS_ACTION_ATTR_TRUNC action to limit the size of the sample.
- */
-enum ovs_psample_attr {
-	OVS_PSAMPLE_ATTR_GROUP = 1,	/* u32 number. */
-	OVS_PSAMPLE_ATTR_COOKIE,	/* Optional, user specified cookie. */
-
-	/* private: */
-	__OVS_PSAMPLE_ATTR_MAX
-};
-
-#define OVS_PSAMPLE_ATTR_MAX (__OVS_PSAMPLE_ATTR_MAX - 1)
 
 /**
  * enum ovs_action_attr - Action types.
@@ -992,8 +938,6 @@ enum ovs_psample_attr {
  * of l3 tunnel flag in the tun_flags field of OVS_ACTION_ATTR_ADD_MPLS
  * argument.
  * @OVS_ACTION_ATTR_DROP: Explicit drop action.
- * @OVS_ACTION_ATTR_PSAMPLE: Send a sample of the packet to external observers
- * via psample.
  *
  * Only a single header can be set with a single %OVS_ACTION_ATTR_SET.  Not all
  * fields within a header are modifiable, e.g. the IPv4 protocol and fragment
@@ -1032,16 +976,10 @@ enum ovs_action_attr {
 	OVS_ACTION_ATTR_ADD_MPLS,     /* struct ovs_action_add_mpls. */
 	OVS_ACTION_ATTR_DEC_TTL,      /* Nested OVS_DEC_TTL_ATTR_*. */
 	OVS_ACTION_ATTR_DROP,         /* u32 error code. */
-	OVS_ACTION_ATTR_PSAMPLE,      /* Nested OVS_PSAMPLE_ATTR_*. */
 
 	__OVS_ACTION_ATTR_MAX,	      /* Nothing past this will be accepted
 				       * from userspace. */
 
-#ifdef __KERNEL__
-	OVS_ACTION_ATTR_SET_TO_MASKED, /* Kernel module internal masked
-					* set action converted from
-					* OVS_ACTION_ATTR_SET. */
-#endif
 };
 
 #define OVS_ACTION_ATTR_MAX (__OVS_ACTION_ATTR_MAX - 1)

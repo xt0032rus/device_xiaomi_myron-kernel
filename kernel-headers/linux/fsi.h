@@ -1,6 +1,6 @@
 /* SPDX-License-Identifier: GPL-2.0+ WITH Linux-syscall-note */
-#ifndef _UAPI_LINUX_FSI_H
-#define _UAPI_LINUX_FSI_H
+#ifndef _LINUX_FSI_H
+#define _LINUX_FSI_H
 
 #include <linux/types.h>
 #include <linux/ioctl.h>
@@ -79,4 +79,4 @@ struct scom_access {
  */
 #define FSI_SBEFIFO_READ_TIMEOUT_SECONDS	_IOW('s', 0x00, __u32)
 
-#endif /* _UAPI_LINUX_FSI_H */
+#endif /* _LINUX_FSI_H */

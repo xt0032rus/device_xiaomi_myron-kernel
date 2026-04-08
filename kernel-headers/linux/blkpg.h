@@ -1,8 +1,8 @@
 /* SPDX-License-Identifier: GPL-2.0 WITH Linux-syscall-note */
-#ifndef _UAPI__LINUX_BLKPG_H
-#define _UAPI__LINUX_BLKPG_H
+#ifndef __LINUX_BLKPG_H
+#define __LINUX_BLKPG_H
 
-#include <linux/compiler.h>
+
 #include <linux/ioctl.h>
 
 #define BLKPG      _IO(0x12,105)
@@ -12,7 +12,7 @@ struct blkpg_ioctl_arg {
         int op;
         int flags;
         int datalen;
-        void __user *data;
+        void *data;
 };
 
 /* The subfunctions (for the op field) */
@@ -33,4 +33,4 @@ struct blkpg_partition {
 	char volname[BLKPG_VOLNAMELTH];	/* unused / ignore */
 };
 
-#endif /* _UAPI__LINUX_BLKPG_H */
+#endif /* __LINUX_BLKPG_H */

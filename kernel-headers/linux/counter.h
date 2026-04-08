@@ -3,8 +3,8 @@
  * Userspace ABI for Counter character devices
  * Copyright (C) 2020 William Breathitt Gray
  */
-#ifndef _UAPI_COUNTER_H_
-#define _UAPI_COUNTER_H_
+#ifndef _COUNTER_H_
+#define _COUNTER_H_
 
 #include <linux/ioctl.h>
 #include <linux/types.h>
@@ -38,7 +38,7 @@ enum counter_scope {
  *
  * For example, if the Count 2 ceiling extension of Counter device 4 is desired,
  * set type equal to COUNTER_COMPONENT_EXTENSION, scope equal to
- * COUNTER_SCOPE_COUNT, parent equal to 2, and id equal to the value provided by
+ * COUNTER_COUNT_SCOPE, parent equal to 2, and id equal to the value provided by
  * the respective /sys/bus/counter/devices/counter4/count2/ceiling_component_id
  * sysfs attribute.
  */
@@ -167,4 +167,4 @@ enum counter_signal_polarity {
 	COUNTER_SIGNAL_POLARITY_NEGATIVE,
 };
 
-#endif /* _UAPI_COUNTER_H_ */
+#endif /* _COUNTER_H_ */

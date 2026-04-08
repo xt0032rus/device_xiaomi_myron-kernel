@@ -1,6 +1,6 @@
 /* SPDX-License-Identifier: GPL-2.0 WITH Linux-syscall-note */
-#ifndef _UAPI__SOCK_DIAG_H__
-#define _UAPI__SOCK_DIAG_H__
+#ifndef __SOCK_DIAG_H__
+#define __SOCK_DIAG_H__
 
 #include <linux/types.h>
 
@@ -62,4 +62,4 @@ enum {
 
 #define SK_DIAG_BPF_STORAGE_MAX        (__SK_DIAG_BPF_STORAGE_MAX - 1)
 
-#endif /* _UAPI__SOCK_DIAG_H__ */
+#endif /* __SOCK_DIAG_H__ */

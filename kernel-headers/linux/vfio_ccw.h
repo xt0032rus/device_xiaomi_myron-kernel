@@ -21,7 +21,7 @@ struct ccw_io_region {
 #define IRB_AREA_SIZE 96
 	__u8	irb_area[IRB_AREA_SIZE];
 	__u32	ret_code;
-} __packed;
+} __attribute__((packed));
 
 /*
  * used for processing commands that trigger asynchronous actions
@@ -32,7 +32,7 @@ struct ccw_io_region {
 struct ccw_cmd_region {
 	__u32 command;
 	__u32 ret_code;
-} __packed;
+} __attribute__((packed));
 
 /*
  * Used for processing commands that read the subchannel-information block
@@ -42,7 +42,7 @@ struct ccw_cmd_region {
 struct ccw_schib_region {
 #define SCHIB_AREA_SIZE 52
 	__u8 schib_area[SCHIB_AREA_SIZE];
-} __packed;
+} __attribute__((packed));
 
 /*
  * Used for returning a Channel Report Word to userspace.
@@ -51,6 +51,6 @@ struct ccw_schib_region {
 struct ccw_crw_region {
 	__u32 crw;
 	__u32 pad;
-} __packed;
+} __attribute__((packed));
 
 #endif

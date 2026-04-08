@@ -3,7 +3,7 @@
  * This file is provided under a dual BSD/GPLv2 license.  When using or
  * redistributing this file, you may do so under either license.
  *
- * Copyright(c) 2018 Intel Corporation
+ * Copyright(c) 2018 Intel Corporation. All rights reserved.
  */
 
 #ifndef __INCLUDE_UAPI_SOUND_SOF_USER_HEADER_H__
@@ -35,7 +35,7 @@ struct sof_abi_hdr {
 	__u32 abi;
 	__u32 reserved[4];
 	__u32 data[];
-}  __packed;
+}  __attribute__((packed));
 
 #define SOF_MANIFEST_DATA_TYPE_NHLT 1
 

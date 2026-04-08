@@ -5,8 +5,8 @@
  * Copyright 2021 NXP
  *
  */
-#ifndef _UAPI_FSL_MC_H_
-#define _UAPI_FSL_MC_H_
+#ifndef _FSL_MC_H_
+#define _FSL_MC_H_
 
 #include <linux/types.h>
 
@@ -31,4 +31,4 @@ struct fsl_mc_command {
 	_IOWR(FSL_MC_SEND_CMD_IOCTL_TYPE, FSL_MC_SEND_CMD_IOCTL_SEQ, \
 	struct fsl_mc_command)
 
-#endif /* _UAPI_FSL_MC_H_ */
+#endif /* _FSL_MC_H_ */

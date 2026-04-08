@@ -5,8 +5,8 @@
  * Copyright (c) 2021 Intel Corporation. All rights reserved.
  */
 
-#ifndef _UAPI_LINUX_VIRTIO_I2C_H
-#define _UAPI_LINUX_VIRTIO_I2C_H
+#ifndef _LINUX_VIRTIO_I2C_H
+#define _LINUX_VIRTIO_I2C_H
 
 #include <linux/const.h>
 #include <linux/types.h>
@@ -44,4 +44,4 @@ struct virtio_i2c_in_hdr {
 #define VIRTIO_I2C_MSG_OK	0
 #define VIRTIO_I2C_MSG_ERR	1
 
-#endif /* _UAPI_LINUX_VIRTIO_I2C_H */
+#endif /* _LINUX_VIRTIO_I2C_H */

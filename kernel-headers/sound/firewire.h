@@ -1,6 +1,6 @@
 /* SPDX-License-Identifier: GPL-2.0 WITH Linux-syscall-note */
-#ifndef _UAPI_SOUND_FIREWIRE_H_INCLUDED
-#define _UAPI_SOUND_FIREWIRE_H_INCLUDED
+#ifndef _SOUND_FIREWIRE_H_INCLUDED
+#define _SOUND_FIREWIRE_H_INCLUDED
 
 #include <linux/ioctl.h>
 #include <linux/types.h>
@@ -277,11 +277,7 @@ struct snd_firewire_motu_register_dsp_parameter {
  * expected to be linear value (not logarithm) for audio signal level between 0.0 and +1.0.
  */
 struct snd_firewire_motu_command_dsp_meter {
-#ifdef __KERNEL__
-	__u32 data[SNDRV_FIREWIRE_MOTU_COMMAND_DSP_METER_COUNT];
-#else
 	float data[SNDRV_FIREWIRE_MOTU_COMMAND_DSP_METER_COUNT];
-#endif
 };
 
-#endif /* _UAPI_SOUND_FIREWIRE_H_INCLUDED */
+#endif /* _SOUND_FIREWIRE_H_INCLUDED */

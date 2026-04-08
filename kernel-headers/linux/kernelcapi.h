@@ -8,8 +8,8 @@
  * 
  */
 
-#ifndef _UAPI__KERNELCAPI_H__
-#define _UAPI__KERNELCAPI_H__
+#ifndef __KERNELCAPI_H__
+#define __KERNELCAPI_H__
 
 #define CAPI_MAXAPPL	240	/* maximum number of applications  */
 #define CAPI_MAXCONTR	32	/* maximum number of controller    */
@@ -45,4 +45,4 @@ typedef struct kcapi_carddef {
 
 
 
-#endif /* _UAPI__KERNELCAPI_H__ */
+#endif /* __KERNELCAPI_H__ */

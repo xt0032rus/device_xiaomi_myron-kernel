@@ -1,6 +1,6 @@
 /* SPDX-License-Identifier: GPL-2.0 WITH Linux-syscall-note */
-#ifndef _UAPI_LINUX_ICMPV6_H
-#define _UAPI_LINUX_ICMPV6_H
+#ifndef _LINUX_ICMPV6_H
+#define _LINUX_ICMPV6_H
 
 #include <linux/types.h>
 #include <asm/byteorder.h>
@@ -112,7 +112,6 @@ struct icmp6hdr {
 #define ICMPV6_MOBILE_PREFIX_ADV	147
 
 #define ICMPV6_MRDISC_ADV		151
-#define ICMPV6_MRDISC_SOL		152
 
 #define ICMPV6_MSG_MAX          255
 
@@ -176,4 +175,4 @@ struct icmp6_filter {
 #define MLD2_ALL_MCR_INIT { { { 0xff,0x02,0,0,0,0,0,0,0,0,0,0,0,0,0,0x16 } } }
 
 
-#endif /* _UAPI_LINUX_ICMPV6_H */
+#endif /* _LINUX_ICMPV6_H */

@@ -1,6 +1,6 @@
 /* SPDX-License-Identifier: GPL-2.0 WITH Linux-syscall-note */
-#ifndef _UAPI_LINUX_WATCH_QUEUE_H
-#define _UAPI_LINUX_WATCH_QUEUE_H
+#ifndef _LINUX_WATCH_QUEUE_H
+#define _LINUX_WATCH_QUEUE_H
 
 #include <linux/types.h>
 #include <linux/fcntl.h>
@@ -101,4 +101,4 @@ struct key_notification {
 	__u32	aux;		/* Per-type auxiliary data */
 };
 
-#endif /* _UAPI_LINUX_WATCH_QUEUE_H */
+#endif /* _LINUX_WATCH_QUEUE_H */

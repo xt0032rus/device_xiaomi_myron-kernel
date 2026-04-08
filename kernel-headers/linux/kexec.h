@@ -1,6 +1,6 @@
 /* SPDX-License-Identifier: GPL-2.0 WITH Linux-syscall-note */
-#ifndef _UAPILINUX_KEXEC_H
-#define _UAPILINUX_KEXEC_H
+#ifndef LINUX_KEXEC_H
+#define LINUX_KEXEC_H
 
 /* kexec system call -  It loads the new kernel to boot into.
  * kexec does not sync, or unmount filesystems so if you need
@@ -13,7 +13,6 @@
 #define KEXEC_ON_CRASH		0x00000001
 #define KEXEC_PRESERVE_CONTEXT	0x00000002
 #define KEXEC_UPDATE_ELFCOREHDR	0x00000004
-#define KEXEC_CRASH_HOTPLUG_SUPPORT 0x00000008
 #define KEXEC_ARCH_MASK		0xffff0000
 
 /*
@@ -26,7 +25,6 @@
 #define KEXEC_FILE_UNLOAD	0x00000001
 #define KEXEC_FILE_ON_CRASH	0x00000002
 #define KEXEC_FILE_NO_INITRAMFS	0x00000004
-#define KEXEC_FILE_DEBUG	0x00000008
 
 /* These values match the ELF architecture values.
  * Unless there is a good reason that should continue to be the case.
@@ -51,7 +49,6 @@
 /* The artificial cap on the number of segments passed to kexec_load. */
 #define KEXEC_SEGMENT_MAX 16
 
-#ifndef __KERNEL__
 /*
  * This structure is used to hold the arguments that are used when
  * loading  kernel binaries.
@@ -63,6 +60,5 @@ struct kexec_segment {
 	__kernel_size_t memsz;
 };
 
-#endif /* __KERNEL__ */
 
-#endif /* _UAPILINUX_KEXEC_H */
+#endif /* LINUX_KEXEC_H */

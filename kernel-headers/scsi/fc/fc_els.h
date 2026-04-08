@@ -289,7 +289,7 @@ struct fc_tlv_desc {
  * tag and len field, calculate the address of the next descriptor based
  * on the len field.
  */
-static inline void *fc_tlv_next_desc(void *desc)
+static __inline__ void *fc_tlv_next_desc(void *desc)
 {
 	struct fc_tlv_desc *tlv = desc;
 

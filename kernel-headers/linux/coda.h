@@ -56,8 +56,8 @@ Mellon the rights to redistribute these changes without encumbrance.
  * Peter Braam, Aug 1996
  */
 
-#ifndef _UAPI_CODA_HEADER_
-#define _UAPI_CODA_HEADER_
+#ifndef _CODA_HEADER_
+#define _CODA_HEADER_
 
 
 /* Catch new _KERNEL defn for NetBSD and DJGPP/__CYGWIN32__ */
@@ -84,7 +84,7 @@ typedef unsigned __int64 u_quad_t;
 typedef unsigned long long u_quad_t;
 #endif
 
-#define inline
+#define __inline__
 
 #else  /* DJGPP but not KERNEL */
 #include <sys/time.h>
@@ -96,12 +96,10 @@ typedef unsigned long long u_quad_t;
 #if defined(__linux__)
 #include <linux/time.h>
 #define cdev_t u_quad_t
-#ifndef __KERNEL__
 #if !defined(_UQUAD_T_) && (!defined(__GLIBC__) || __GLIBC__ < 2)
 #define _UQUAD_T_ 1
 typedef unsigned long long u_quad_t;
 #endif
-#endif /* __KERNEL__ */
 #else
 #define cdev_t dev_t
 #endif
@@ -615,9 +613,6 @@ struct coda_open_by_fd_out {
     struct coda_out_hdr oh;
     int fd;
 
-#ifdef __KERNEL__
-    struct file *fh; /* not passed from userspace but used in-kernel only */
-#endif
 };
 
 /* coda_open_by_path: */
@@ -733,14 +728,14 @@ union coda_downcalls {
 
 #define PIOCPARM_MASK 0x0000ffff
 struct ViceIoctl {
-        void __user *in;        /* Data to be transferred in */
-        void __user *out;       /* Data to be transferred out */
+        void *in;        /* Data to be transferred in */
+        void *out;       /* Data to be transferred out */
         u_short in_size;        /* Size of input buffer <= 2K */
         u_short out_size;       /* Maximum size of output buffer, <= 2K */
 };
 
 struct PioctlData {
-        const char __user *path;
+        const char *path;
         int follow;
         struct ViceIoctl vi;
 };
@@ -758,4 +753,4 @@ struct coda_mount_data {
 	int		fd;       /* Opened device */
 };
 
-#endif /* _UAPI_CODA_HEADER_ */
+#endif /* _CODA_HEADER_ */

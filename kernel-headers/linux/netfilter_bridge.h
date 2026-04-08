@@ -1,6 +1,6 @@
 /* SPDX-License-Identifier: GPL-2.0 WITH Linux-syscall-note */
-#ifndef _UAPI__LINUX_BRIDGE_NETFILTER_H
-#define _UAPI__LINUX_BRIDGE_NETFILTER_H
+#ifndef __LINUX_BRIDGE_NETFILTER_H
+#define __LINUX_BRIDGE_NETFILTER_H
 
 /* bridge-specific defines for netfilter. 
  */
@@ -11,9 +11,7 @@
 #include <linux/if_vlan.h>
 #include <linux/if_pppox.h>
 
-#ifndef __KERNEL__
 #include <limits.h> /* for INT_MIN, INT_MAX */
-#endif
 
 /* Bridge Hooks */
 /* After promisc drops, checksum checks. */
@@ -41,4 +39,4 @@ enum nf_br_hook_priorities {
 	NF_BR_PRI_LAST = INT_MAX,
 };
 
-#endif /* _UAPI__LINUX_BRIDGE_NETFILTER_H */
+#endif /* __LINUX_BRIDGE_NETFILTER_H */

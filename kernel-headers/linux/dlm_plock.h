@@ -7,8 +7,8 @@
  * of the GNU General Public License v.2.
  */
 
-#ifndef _UAPI__DLM_PLOCK_DOT_H__
-#define _UAPI__DLM_PLOCK_DOT_H__
+#ifndef __DLM_PLOCK_DOT_H__
+#define __DLM_PLOCK_DOT_H__
 
 #include <linux/types.h>
 
@@ -44,4 +44,4 @@ struct dlm_plock_info {
 };
 
 
-#endif /* _UAPI__DLM_PLOCK_DOT_H__ */
+#endif /* __DLM_PLOCK_DOT_H__ */

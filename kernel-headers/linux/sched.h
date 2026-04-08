@@ -1,6 +1,6 @@
 /* SPDX-License-Identifier: GPL-2.0 WITH Linux-syscall-note */
-#ifndef _UAPI_LINUX_SCHED_H
-#define _UAPI_LINUX_SCHED_H
+#ifndef _LINUX_SCHED_H
+#define _LINUX_SCHED_H
 
 #include <linux/types.h>
 
@@ -118,7 +118,6 @@ struct clone_args {
 /* SCHED_ISO: reserved but not implemented yet */
 #define SCHED_IDLE		5
 #define SCHED_DEADLINE		6
-#define SCHED_EXT		7
 
 /* Can be ORed in to make sure the process is reverted back to SCHED_NORMAL on fork */
 #define SCHED_RESET_ON_FORK     0x40000000
@@ -146,4 +145,4 @@ struct clone_args {
 			 SCHED_FLAG_KEEP_ALL		| \
 			 SCHED_FLAG_UTIL_CLAMP)
 
-#endif /* _UAPI_LINUX_SCHED_H */
+#endif /* _LINUX_SCHED_H */

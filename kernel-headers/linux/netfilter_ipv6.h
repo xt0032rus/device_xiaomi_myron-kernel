@@ -5,14 +5,13 @@
  *   this header was blatantly ripped from netfilter_ipv4.h 
  *   it's amazing what adding a bunch of 6s can do =8^)
  */
-#ifndef _UAPI__LINUX_IP6_NETFILTER_H
-#define _UAPI__LINUX_IP6_NETFILTER_H
+#ifndef __LINUX_IP6_NETFILTER_H
+#define __LINUX_IP6_NETFILTER_H
 
 
 #include <linux/netfilter.h>
 
 /* only for userspace compatibility */
-#ifndef __KERNEL__
 
 #include <limits.h> /* for INT_MIN, INT_MAX */
 
@@ -28,7 +27,6 @@
 /* Packets about to hit the wire. */
 #define NF_IP6_POST_ROUTING	4
 #define NF_IP6_NUMHOOKS		5
-#endif /* ! __KERNEL__ */
 
 
 enum nf_ip6_hook_priorities {
@@ -49,4 +47,4 @@ enum nf_ip6_hook_priorities {
 };
 
 
-#endif /* _UAPI__LINUX_IP6_NETFILTER_H */
+#endif /* __LINUX_IP6_NETFILTER_H */

@@ -15,8 +15,8 @@
  *            Link to userspace extensions, favor cookie over handle.
  */
 
-#ifndef _UAPILINUX_NBD_H
-#define _UAPILINUX_NBD_H
+#ifndef LINUX_NBD_H
+#define LINUX_NBD_H
 
 #include <linux/types.h>
 
@@ -42,9 +42,8 @@ enum {
 	NBD_CMD_WRITE = 1,
 	NBD_CMD_DISC = 2,
 	NBD_CMD_FLUSH = 3,
-	NBD_CMD_TRIM = 4,
+	NBD_CMD_TRIM = 4
 	/* userspace defines additional extension commands */
-	NBD_CMD_WRITE_ZEROES = 6,
 };
 
 /* values for flags field, these are server interaction specific. */
@@ -52,15 +51,12 @@ enum {
 #define NBD_FLAG_READ_ONLY	(1 << 1) /* device is read-only */
 #define NBD_FLAG_SEND_FLUSH	(1 << 2) /* can flush writeback cache */
 #define NBD_FLAG_SEND_FUA	(1 << 3) /* send FUA (forced unit access) */
-#define NBD_FLAG_ROTATIONAL	(1 << 4) /* device is rotational */
-#define NBD_FLAG_SEND_TRIM	(1 << 5) /* send trim/discard */
-#define NBD_FLAG_SEND_WRITE_ZEROES (1 << 6) /* supports WRITE_ZEROES */
 /* there is a gap here to match userspace */
+#define NBD_FLAG_SEND_TRIM	(1 << 5) /* send trim/discard */
 #define NBD_FLAG_CAN_MULTI_CONN	(1 << 8)	/* Server supports multiple connections per export. */
 
 /* values for cmd flags in the upper 16 bits of request type */
 #define NBD_CMD_FLAG_FUA	(1 << 16) /* FUA (forced unit access) op */
-#define NBD_CMD_FLAG_NO_HOLE	(1 << 17) /* Do not punch a hole for WRITE_ZEROES */
 
 /* These are client behavior specific flags. */
 #define NBD_CFLAG_DESTROY_ON_DISCONNECT	(1 << 0) /* delete the nbd device on
@@ -105,4 +101,4 @@ struct nbd_reply {
 		char handle[8];	/* older spelling of cookie		*/
 	};
 };
-#endif /* _UAPILINUX_NBD_H */
+#endif /* LINUX_NBD_H */

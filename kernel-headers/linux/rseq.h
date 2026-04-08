@@ -1,6 +1,6 @@
 /* SPDX-License-Identifier: GPL-2.0+ WITH Linux-syscall-note */
-#ifndef _UAPI_LINUX_RSEQ_H
-#define _UAPI_LINUX_RSEQ_H
+#ifndef _LINUX_RSEQ_H
+#define _LINUX_RSEQ_H
 
 /*
  * linux/rseq.h
@@ -154,4 +154,4 @@ struct rseq {
 	char end[];
 } __attribute__((aligned(4 * sizeof(__u64))));
 
-#endif /* _UAPI_LINUX_RSEQ_H */
+#endif /* _LINUX_RSEQ_H */

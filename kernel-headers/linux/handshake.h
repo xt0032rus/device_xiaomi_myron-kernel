@@ -3,8 +3,8 @@
 /*	Documentation/netlink/specs/handshake.yaml */
 /* YNL-GEN uapi header */
 
-#ifndef _UAPI_LINUX_HANDSHAKE_H
-#define _UAPI_LINUX_HANDSHAKE_H
+#ifndef _LINUX_HANDSHAKE_H
+#define _LINUX_HANDSHAKE_H
 
 #define HANDSHAKE_FAMILY_NAME		"handshake"
 #define HANDSHAKE_FAMILY_VERSION	1
@@ -71,4 +71,4 @@ enum {
 #define HANDSHAKE_MCGRP_NONE	"none"
 #define HANDSHAKE_MCGRP_TLSHD	"tlshd"
 
-#endif /* _UAPI_LINUX_HANDSHAKE_H */
+#endif /* _LINUX_HANDSHAKE_H */

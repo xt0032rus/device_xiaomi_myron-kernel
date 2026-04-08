@@ -1,6 +1,6 @@
 /* SPDX-License-Identifier: GPL-2.0 WITH Linux-syscall-note */
-#ifndef _UAPI_LINUX_FANOTIFY_H
-#define _UAPI_LINUX_FANOTIFY_H
+#ifndef _LINUX_FANOTIFY_H
+#define _LINUX_FANOTIFY_H
 
 #include <linux/types.h>
 
@@ -8,8 +8,8 @@
 #define FAN_ACCESS		0x00000001	/* File was accessed */
 #define FAN_MODIFY		0x00000002	/* File was modified */
 #define FAN_ATTRIB		0x00000004	/* Metadata changed */
-#define FAN_CLOSE_WRITE		0x00000008	/* Writable file closed */
-#define FAN_CLOSE_NOWRITE	0x00000010	/* Unwritable file closed */
+#define FAN_CLOSE_WRITE		0x00000008	/* Writtable file closed */
+#define FAN_CLOSE_NOWRITE	0x00000010	/* Unwrittable file closed */
 #define FAN_OPEN		0x00000020	/* File was opened */
 #define FAN_MOVED_FROM		0x00000040	/* File was moved from X */
 #define FAN_MOVED_TO		0x00000080	/* File was moved to Y */
@@ -243,4 +243,4 @@ struct fanotify_response_info_audit_rule {
 				(long)(meta)->event_len >= (long)FAN_EVENT_METADATA_LEN && \
 				(long)(meta)->event_len <= (long)(len))
 
-#endif /* _UAPI_LINUX_FANOTIFY_H */
+#endif /* _LINUX_FANOTIFY_H */

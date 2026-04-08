@@ -1,6 +1,6 @@
 /* SPDX-License-Identifier: GPL-2.0 WITH Linux-syscall-note */
-#ifndef _UAPIBSG_H
-#define _UAPIBSG_H
+#ifndef BSG_H
+#define BSG_H
 
 #include <linux/types.h>
 
@@ -64,4 +64,4 @@ struct sg_io_v4 {
 };
 
 
-#endif /* _UAPIBSG_H */
+#endif /* BSG_H */

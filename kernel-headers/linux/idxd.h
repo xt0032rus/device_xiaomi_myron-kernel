@@ -3,11 +3,7 @@
 #ifndef _USR_IDXD_H_
 #define _USR_IDXD_H_
 
-#ifdef __KERNEL__
-#include <linux/types.h>
-#else
 #include <stdint.h>
-#endif
 
 /* Driver command error status */
 enum idxd_scmd_stat {
@@ -31,7 +27,6 @@ enum idxd_scmd_stat {
 	IDXD_SCMD_WQ_IRQ_ERR = 0x80100000,
 	IDXD_SCMD_WQ_USER_NO_IOMMU = 0x80110000,
 	IDXD_SCMD_DEV_EVL_ERR = 0x80120000,
-	IDXD_SCMD_WQ_NO_DRV_NAME = 0x80200000,
 };
 
 #define IDXD_SCMD_SOFTERR_MASK	0x80000000
@@ -306,10 +301,10 @@ struct dsa_raw_desc {
 
 /*
  * The status field will be modified by hardware, therefore it should be
- * volatile and prevent the compiler from optimize the read.
+ * __volatile__ and prevent the compiler from optimize the read.
  */
 struct dsa_completion_record {
-	volatile uint8_t	status;
+	__volatile__ uint8_t	status;
 	union {
 		uint8_t		result;
 		uint8_t		dif_status;
@@ -373,7 +368,7 @@ struct dsa_raw_completion_record {
 } __attribute__((packed));
 
 struct iax_completion_record {
-	volatile uint8_t        status;
+	__volatile__ uint8_t        status;
 	uint8_t                 error_code;
 	uint8_t			fault_info;
 	uint8_t			rsvd;

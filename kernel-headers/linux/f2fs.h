@@ -1,7 +1,7 @@
 /* SPDX-License-Identifier: GPL-2.0 WITH Linux-syscall-note */
 
-#ifndef _UAPI_LINUX_F2FS_H
-#define _UAPI_LINUX_F2FS_H
+#ifndef _LINUX_F2FS_H
+#define _LINUX_F2FS_H
 #include <linux/types.h>
 #include <linux/ioctl.h>
 
@@ -43,6 +43,7 @@
 #define F2FS_IOC_DECOMPRESS_FILE	_IO(F2FS_IOCTL_MAGIC, 23)
 #define F2FS_IOC_COMPRESS_FILE		_IO(F2FS_IOCTL_MAGIC, 24)
 #define F2FS_IOC_START_ATOMIC_REPLACE	_IO(F2FS_IOCTL_MAGIC, 25)
+#define F2FS_IOC_GET_DEV_ALIAS_FILE	_IOR(F2FS_IOCTL_MAGIC, 26, __u32)
 
 /*
  * should be same as XFS_IOC_GOINGDOWN.
@@ -96,4 +97,4 @@ struct f2fs_comp_option {
 	__u8 log_cluster_size;
 };
 
-#endif /* _UAPI_LINUX_F2FS_H */
+#endif /* _LINUX_F2FS_H */

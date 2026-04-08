@@ -10,8 +10,8 @@
  */
 #include <linux/types.h>
 
-#ifndef _UAPI_PPP_DEFS_H_
-#define _UAPI_PPP_DEFS_H_
+#ifndef _PPP_DEFS_H_
+#define _PPP_DEFS_H_
 
 /*
  * The basic PPP frame.
@@ -162,4 +162,4 @@ struct ppp_idle64 {
     __s64 recv_idle;		/* time since last NP packet received */
 };
 
-#endif /* _UAPI_PPP_DEFS_H_ */
+#endif /* _PPP_DEFS_H_ */

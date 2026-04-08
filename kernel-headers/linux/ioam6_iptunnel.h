@@ -6,13 +6,13 @@
  *  Justin Iurman <justin.iurman@uliege.be>
  */
 
-#ifndef _UAPI_LINUX_IOAM6_IPTUNNEL_H
-#define _UAPI_LINUX_IOAM6_IPTUNNEL_H
+#ifndef _LINUX_IOAM6_IPTUNNEL_H
+#define _LINUX_IOAM6_IPTUNNEL_H
 
 /* Encap modes:
  *  - inline: direct insertion
  *  - encap: ip6ip6 encapsulation
- *  - auto: inline for local packets, encap for in-transit packets
+ *  - auto: __inline__ for local packets, encap for in-transit packets
  */
 enum {
 	__IOAM6_IPTUNNEL_MODE_MIN,
@@ -50,15 +50,9 @@ enum {
 	IOAM6_IPTUNNEL_FREQ_K,		/* u32 */
 	IOAM6_IPTUNNEL_FREQ_N,		/* u32 */
 
-	/* Tunnel src address.
-	 * For encap,auto modes.
-	 * Optional (automatic if not provided).
-	 */
-	IOAM6_IPTUNNEL_SRC,		/* struct in6_addr */
-
 	__IOAM6_IPTUNNEL_MAX,
 };
 
 #define IOAM6_IPTUNNEL_MAX (__IOAM6_IPTUNNEL_MAX - 1)
 
-#endif /* _UAPI_LINUX_IOAM6_IPTUNNEL_H */
+#endif /* _LINUX_IOAM6_IPTUNNEL_H */

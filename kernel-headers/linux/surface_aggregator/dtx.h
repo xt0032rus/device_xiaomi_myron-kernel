@@ -9,8 +9,8 @@
  * Copyright (C) 2020-2021 Maximilian Luz <luzmaximilian@gmail.com>
  */
 
-#ifndef _UAPI_LINUX_SURFACE_AGGREGATOR_DTX_H
-#define _UAPI_LINUX_SURFACE_AGGREGATOR_DTX_H
+#ifndef _LINUX_SURFACE_AGGREGATOR_DTX_H
+#define _LINUX_SURFACE_AGGREGATOR_DTX_H
 
 #include <linux/ioctl.h>
 #include <linux/types.h>
@@ -143,4 +143,4 @@ struct sdtx_base_info {
 #define SDTX_IOCTL_GET_DEVICE_MODE	_IOR(0xa5, 0x2a, __u16)
 #define SDTX_IOCTL_GET_LATCH_STATUS	_IOR(0xa5, 0x2b, __u16)
 
-#endif /* _UAPI_LINUX_SURFACE_AGGREGATOR_DTX_H */
+#endif /* _LINUX_SURFACE_AGGREGATOR_DTX_H */

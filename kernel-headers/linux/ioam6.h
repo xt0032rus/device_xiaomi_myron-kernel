@@ -6,8 +6,8 @@
  *  Justin Iurman <justin.iurman@uliege.be>
  */
 
-#ifndef _UAPI_LINUX_IOAM6_H
-#define _UAPI_LINUX_IOAM6_H
+#ifndef _LINUX_IOAM6_H
+#define _LINUX_IOAM6_H
 
 #include <asm/byteorder.h>
 #include <linux/types.h>
@@ -130,4 +130,4 @@ struct ioam6_trace_hdr {
 	__u8	data[];
 } __attribute__((packed));
 
-#endif /* _UAPI_LINUX_IOAM6_H */
+#endif /* _LINUX_IOAM6_H */

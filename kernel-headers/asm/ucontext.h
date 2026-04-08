@@ -14,8 +14,8 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-#ifndef _UAPI__ASM_UCONTEXT_H
-#define _UAPI__ASM_UCONTEXT_H
+#ifndef __ASM_UCONTEXT_H
+#define __ASM_UCONTEXT_H
 
 #include <linux/types.h>
 
@@ -30,4 +30,4 @@ struct ucontext {
 	struct sigcontext uc_mcontext;
 };
 
-#endif /* _UAPI__ASM_UCONTEXT_H */
+#endif /* __ASM_UCONTEXT_H */

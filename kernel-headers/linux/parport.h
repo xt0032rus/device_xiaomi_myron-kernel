@@ -4,8 +4,8 @@
  * published by the Free Software Foundation.
  */
 
-#ifndef _UAPI_PARPORT_H_
-#define _UAPI_PARPORT_H_
+#ifndef _PARPORT_H_
+#define _PARPORT_H_
 
 /* Start off with user-visible constants */
 
@@ -95,4 +95,4 @@ typedef enum {
 #define PARPORT_EPP_FAST_8		(1<<3) /* 8-bit EPP transfers */
 
 /* The rest is for the kernel only */
-#endif /* _UAPI_PARPORT_H_ */
+#endif /* _PARPORT_H_ */

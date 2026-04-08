@@ -5,8 +5,8 @@
  * These ioctls can be used on filesystems that support fscrypt.  See the
  * "User API" section of Documentation/filesystems/fscrypt.rst.
  */
-#ifndef _UAPI_LINUX_FSCRYPT_H
-#define _UAPI_LINUX_FSCRYPT_H
+#ifndef _LINUX_FSCRYPT_H
+#define _LINUX_FSCRYPT_H
 
 #include <linux/ioctl.h>
 #include <linux/types.h>
@@ -128,7 +128,10 @@ struct fscrypt_add_key_arg {
 	struct fscrypt_key_specifier key_spec;
 	__u32 raw_size;
 	__u32 key_id;
-	__u32 __reserved[8];
+	__u32 __reserved[7];
+	/* N.B.: "temporary" flag, not reserved upstream */
+#define __FSCRYPT_ADD_KEY_FLAG_HW_WRAPPED		0x00000001
+	__u32 __flags;
 	__u8 raw[];
 };
 
@@ -171,7 +174,6 @@ struct fscrypt_get_key_status_arg {
 /**********************************************************************/
 
 /* old names; don't add anything new here! */
-#ifndef __KERNEL__
 #define fscrypt_policy			fscrypt_policy_v1
 #define FS_KEY_DESCRIPTOR_SIZE		FSCRYPT_KEY_DESCRIPTOR_SIZE
 #define FS_POLICY_FLAGS_PAD_4		FSCRYPT_POLICY_FLAGS_PAD_4
@@ -192,6 +194,5 @@ struct fscrypt_get_key_status_arg {
 #define FS_KEY_DESC_PREFIX		FSCRYPT_KEY_DESC_PREFIX
 #define FS_KEY_DESC_PREFIX_SIZE		FSCRYPT_KEY_DESC_PREFIX_SIZE
 #define FS_MAX_KEY_SIZE			FSCRYPT_MAX_KEY_SIZE
-#endif /* !__KERNEL__ */
 
-#endif /* _UAPI_LINUX_FSCRYPT_H */
+#endif /* _LINUX_FSCRYPT_H */

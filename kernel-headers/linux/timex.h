@@ -50,14 +50,13 @@
  * 2004-08-12    Christoph Lameter
  *      Reworked time interpolation logic
  */
-#ifndef _UAPI_LINUX_TIMEX_H
-#define _UAPI_LINUX_TIMEX_H
+#ifndef _LINUX_TIMEX_H
+#define _LINUX_TIMEX_H
 
 #include <linux/time.h>
 
 #define NTP_API		4	/* NTP API version */
 
-#ifndef __KERNEL__
 /*
  * syscall interface - used (mainly by NTP daemon)
  * to discipline kernel clock oscillator
@@ -92,7 +91,6 @@ struct timex {
 	int  :32; int  :32; int  :32; int  :32;
 	int  :32; int  :32; int  :32;
 };
-#endif
 
 struct __kernel_timex_timeval {
 	__kernel_time64_t       tv_sec;
@@ -148,10 +146,8 @@ struct __kernel_timex {
 #define ADJ_NANO		0x2000	/* select nanosecond resolution */
 #define ADJ_TICK		0x4000	/* tick value */
 
-#ifndef __KERNEL__
 #define ADJ_OFFSET_SINGLESHOT	0x8001	/* old-fashioned adjtime */
 #define ADJ_OFFSET_SS_READ	0xa001	/* read-only adjtime */
-#endif
 
 /* NTP userland likes the MOD_ prefix better */
 #define MOD_OFFSET	ADJ_OFFSET
@@ -204,4 +200,4 @@ struct __kernel_timex {
 #define TIME_BAD	TIME_ERROR /* bw compat */
 
 
-#endif /* _UAPI_LINUX_TIMEX_H */
+#endif /* _LINUX_TIMEX_H */

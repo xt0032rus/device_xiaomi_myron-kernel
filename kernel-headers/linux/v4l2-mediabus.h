@@ -19,18 +19,12 @@
  * @width:	image width
  * @height:	image height
  * @code:	data format code (from enum v4l2_mbus_pixelcode)
- * @field:	used interlacing type (from enum v4l2_field), zero for metadata
- *		mbus codes
- * @colorspace:	colorspace of the data (from enum v4l2_colorspace), zero on
- *		metadata mbus codes
- * @ycbcr_enc:	YCbCr encoding of the data (from enum v4l2_ycbcr_encoding), zero
- *		for metadata mbus codes
- * @hsv_enc:	HSV encoding of the data (from enum v4l2_hsv_encoding), zero for
- *		metadata mbus codes
- * @quantization: quantization of the data (from enum v4l2_quantization), zero
- *		for metadata mbus codes
- * @xfer_func:  transfer function of the data (from enum v4l2_xfer_func), zero
- *		for metadata mbus codes
+ * @field:	used interlacing type (from enum v4l2_field)
+ * @colorspace:	colorspace of the data (from enum v4l2_colorspace)
+ * @ycbcr_enc:	YCbCr encoding of the data (from enum v4l2_ycbcr_encoding)
+ * @hsv_enc:	HSV encoding of the data (from enum v4l2_hsv_encoding)
+ * @quantization: quantization of the data (from enum v4l2_quantization)
+ * @xfer_func:  transfer function of the data (from enum v4l2_xfer_func)
  * @flags:	flags (V4L2_MBUS_FRAMEFMT_*)
  * @reserved:  reserved bytes that can be later used
  */
@@ -52,7 +46,6 @@ struct v4l2_mbus_framefmt {
 	__u16			reserved[10];
 };
 
-#ifndef __KERNEL__
 /*
  * enum v4l2_mbus_pixelcode and its definitions are now deprecated, and
  * MEDIA_BUS_FMT_ definitions (defined in media-bus-format.h) should be
@@ -149,6 +142,5 @@ enum v4l2_mbus_pixelcode {
 
 	V4L2_MBUS_FROM_MEDIA_BUS_FMT(AHSV8888_1X32),
 };
-#endif /* __KERNEL__ */
 
 #endif

@@ -248,7 +248,6 @@ enum {
  * @max_beb_per1024: maximum expected number of bad PEB per 1024 PEBs
  * @padding: reserved for future, not used, has to be zeroed
  * @disable_fm: whether disable fastmap
- * @need_resv_pool: whether reserve free pebs for filling pool/wl_pool
  *
  * This data structure is used to specify MTD device UBI has to attach and the
  * parameters it has to use. The number which should be assigned to the new UBI
@@ -294,8 +293,7 @@ struct ubi_attach_req {
 	__s32 vid_hdr_offset;
 	__s16 max_beb_per1024;
 	__s8 disable_fm;
-	__s8 need_resv_pool;
-	__s8 padding[8];
+	__s8 padding[9];
 };
 
 /*
@@ -352,7 +350,7 @@ struct ubi_mkvol_req {
 	__s16 name_len;
 	__s8 padding2[4];
 	char name[UBI_MAX_VOLUME_NAME + 1];
-} __packed;
+} __attribute__((packed));
 
 /**
  * struct ubi_rsvol_req - a data structure used in volume re-size requests.
@@ -368,7 +366,7 @@ struct ubi_mkvol_req {
 struct ubi_rsvol_req {
 	__s64 bytes;
 	__s32 vol_id;
-} __packed;
+} __attribute__((packed));
 
 /**
  * struct ubi_rnvol_req - volumes re-name request.
@@ -410,7 +408,7 @@ struct ubi_rnvol_req {
 		__s8  padding2[2];
 		char    name[UBI_MAX_VOLUME_NAME + 1];
 	} ents[UBI_MAX_RNVOL];
-} __packed;
+} __attribute__((packed));
 
 /**
  * struct ubi_leb_change_req - a data structure used in atomic LEB change
@@ -434,7 +432,7 @@ struct ubi_leb_change_req {
 	__s32 bytes;
 	__s8  dtype; /* obsolete, do not use! */
 	__s8  padding[7];
-} __packed;
+} __attribute__((packed));
 
 /**
  * struct ubi_map_req - a data structure used in map LEB requests.
@@ -446,7 +444,7 @@ struct ubi_map_req {
 	__s32 lnum;
 	__s8  dtype; /* obsolete, do not use! */
 	__s8  padding[3];
-} __packed;
+} __attribute__((packed));
 
 
 /**
@@ -460,7 +458,7 @@ struct ubi_set_vol_prop_req {
 	__u8  property;
 	__u8  padding[7];
 	__u64 value;
-}  __packed;
+}  __attribute__((packed));
 
 /**
  * struct ubi_blkcreate_req - a data structure used in block creation requests.
@@ -468,6 +466,6 @@ struct ubi_set_vol_prop_req {
  */
 struct ubi_blkcreate_req {
 	__s8  padding[128];
-}  __packed;
+}  __attribute__((packed));
 
 #endif /* __UBI_USER_H__ */

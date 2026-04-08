@@ -6,8 +6,8 @@
  *  Justin Iurman <justin.iurman@uliege.be>
  */
 
-#ifndef _UAPI_LINUX_IOAM6_GENL_H
-#define _UAPI_LINUX_IOAM6_GENL_H
+#ifndef _LINUX_IOAM6_GENL_H
+#define _LINUX_IOAM6_GENL_H
 
 #define IOAM6_GENL_NAME "IOAM6"
 #define IOAM6_GENL_VERSION 0x1
@@ -49,24 +49,4 @@ enum {
 
 #define IOAM6_CMD_MAX (__IOAM6_CMD_MAX - 1)
 
-#define IOAM6_GENL_EV_GRP_NAME "ioam6_events"
-
-enum ioam6_event_type {
-	IOAM6_EVENT_UNSPEC,
-	IOAM6_EVENT_TRACE,
-};
-
-enum ioam6_event_attr {
-	IOAM6_EVENT_ATTR_UNSPEC,
-
-	IOAM6_EVENT_ATTR_TRACE_NAMESPACE,	/* u16 */
-	IOAM6_EVENT_ATTR_TRACE_NODELEN,		/* u8 */
-	IOAM6_EVENT_ATTR_TRACE_TYPE,		/* u32 */
-	IOAM6_EVENT_ATTR_TRACE_DATA,		/* Binary */
-
-	__IOAM6_EVENT_ATTR_MAX
-};
-
-#define IOAM6_EVENT_ATTR_MAX (__IOAM6_EVENT_ATTR_MAX - 1)
-
-#endif /* _UAPI_LINUX_IOAM6_GENL_H */
+#endif /* _LINUX_IOAM6_GENL_H */

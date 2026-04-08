@@ -54,13 +54,11 @@
  *              Hans Verkuil <hverkuil@xs4all.nl>
  *		et al.
  */
-#ifndef _UAPI__LINUX_VIDEODEV2_H
-#define _UAPI__LINUX_VIDEODEV2_H
+#ifndef __LINUX_VIDEODEV2_H
+#define __LINUX_VIDEODEV2_H
 
-#ifndef __KERNEL__
 #include <sys/time.h>
-#endif
-#include <linux/compiler.h>
+
 #include <linux/ioctl.h>
 #include <linux/types.h>
 #include <linux/v4l2-common.h>
@@ -70,7 +68,7 @@
  * Common stuff for both V4L1 and V4L2
  * Moved from videodev.h
  */
-#define VIDEO_MAX_FRAME               32
+#define VIDEO_MAX_FRAME               64
 #define VIDEO_MAX_PLANES               8
 
 /*
@@ -246,13 +244,6 @@ enum v4l2_colorspace {
 	/* DCI-P3 colorspace, used by cinema projectors */
 	V4L2_COLORSPACE_DCI_P3        = 12,
 
-#ifdef __KERNEL__
-	/*
-	 * Largest supported colorspace value, assigned by the compiler, used
-	 * by the framework to check for invalid values.
-	 */
-	V4L2_COLORSPACE_LAST,
-#endif
 };
 
 /*
@@ -291,13 +282,6 @@ enum v4l2_xfer_func {
 	V4L2_XFER_FUNC_NONE        = 5,
 	V4L2_XFER_FUNC_DCI_P3      = 6,
 	V4L2_XFER_FUNC_SMPTE2084   = 7,
-#ifdef __KERNEL__
-	/*
-	 * Largest supported transfer function value, assigned by the compiler,
-	 * used by the framework to check for invalid values.
-	 */
-	V4L2_XFER_FUNC_LAST,
-#endif
 };
 
 /*
@@ -341,14 +325,12 @@ enum v4l2_ycbcr_encoding {
 	/* Rec. 709/EN 61966-2-4 Extended Gamut -- HDTV */
 	V4L2_YCBCR_ENC_XV709          = 4,
 
-#ifndef __KERNEL__
 	/*
 	 * sYCC (Y'CbCr encoding of sRGB), identical to ENC_601. It was added
 	 * originally due to a misunderstanding of the sYCC standard. It should
 	 * not be used, instead use V4L2_YCBCR_ENC_601.
 	 */
 	V4L2_YCBCR_ENC_SYCC           = 5,
-#endif
 
 	/* BT.2020 Non-constant Luminance Y'CbCr */
 	V4L2_YCBCR_ENC_BT2020         = 6,
@@ -358,13 +340,6 @@ enum v4l2_ycbcr_encoding {
 
 	/* SMPTE 240M -- Obsolete HDTV */
 	V4L2_YCBCR_ENC_SMPTE240M      = 8,
-#ifdef __KERNEL__
-	/*
-	 * Largest supported encoding value, assigned by the compiler, used by
-	 * the framework to check for invalid values.
-	 */
-	V4L2_YCBCR_ENC_LAST,
-#endif
 };
 
 /*
@@ -418,10 +393,8 @@ enum v4l2_quantization {
  * WARNING: Please don't use these deprecated defines in your code, as
  * there is a chance we have to remove them in the future.
  */
-#ifndef __KERNEL__
 #define V4L2_COLORSPACE_ADOBERGB V4L2_COLORSPACE_OPRGB
 #define V4L2_XFER_FUNC_ADOBERGB  V4L2_XFER_FUNC_OPRGB
-#endif
 
 enum v4l2_priority {
 	V4L2_PRIORITY_UNSET       = 0,  /* not initialized */
@@ -502,7 +475,6 @@ struct v4l2_capability {
 #define V4L2_CAP_META_CAPTURE		0x00800000  /* Is a metadata capture device */
 
 #define V4L2_CAP_READWRITE              0x01000000  /* read/write systemcalls */
-#define V4L2_CAP_EDID			0x02000000  /* Is an EDID-only device */
 #define V4L2_CAP_STREAMING              0x04000000  /* streaming I/O ioctls */
 #define V4L2_CAP_META_OUTPUT		0x08000000  /* Is a metadata output device */
 
@@ -583,8 +555,6 @@ struct v4l2_pix_format {
 
 /* RGB formats (6 or 8 bytes per pixel) */
 #define V4L2_PIX_FMT_BGR48_12    v4l2_fourcc('B', '3', '1', '2') /* 48  BGR 12-bit per component */
-#define V4L2_PIX_FMT_BGR48       v4l2_fourcc('B', 'G', 'R', '6') /* 48  BGR 16-bit per component */
-#define V4L2_PIX_FMT_RGB48       v4l2_fourcc('R', 'G', 'B', '6') /* 48  RGB 16-bit per component */
 #define V4L2_PIX_FMT_ABGR64_12   v4l2_fourcc('B', '4', '1', '2') /* 64  BGRA 12-bit per component */
 
 /* Grey formats */
@@ -602,8 +572,6 @@ struct v4l2_pix_format {
 #define V4L2_PIX_FMT_Y10BPACK    v4l2_fourcc('Y', '1', '0', 'B') /* 10  Greyscale bit-packed */
 #define V4L2_PIX_FMT_Y10P    v4l2_fourcc('Y', '1', '0', 'P') /* 10  Greyscale, MIPI RAW10 packed */
 #define V4L2_PIX_FMT_IPU3_Y10		v4l2_fourcc('i', 'p', '3', 'y') /* IPU3 packed 10-bit greyscale */
-#define V4L2_PIX_FMT_Y12P    v4l2_fourcc('Y', '1', '2', 'P') /* 12  Greyscale, MIPI RAW12 packed */
-#define V4L2_PIX_FMT_Y14P    v4l2_fourcc('Y', '1', '4', 'P') /* 14  Greyscale, MIPI RAW14 packed */
 
 /* Palette formats */
 #define V4L2_PIX_FMT_PAL8    v4l2_fourcc('P', 'A', 'L', '8') /*  8  8-bit palette */
@@ -809,25 +777,12 @@ struct v4l2_pix_format {
 #define V4L2_PIX_FMT_QC08C    v4l2_fourcc('Q', '0', '8', 'C') /* Qualcomm 8-bit compressed */
 #define V4L2_PIX_FMT_QC10C    v4l2_fourcc('Q', '1', '0', 'C') /* Qualcomm 10-bit compressed */
 #define V4L2_PIX_FMT_AJPG     v4l2_fourcc('A', 'J', 'P', 'G') /* Aspeed JPEG */
-#define V4L2_PIX_FMT_HEXTILE  v4l2_fourcc('H', 'X', 'T', 'L') /* Hextile compressed */
 
 /* 10bit raw packed, 32 bytes for every 25 pixels, last LSB 6 bits unused */
 #define V4L2_PIX_FMT_IPU3_SBGGR10	v4l2_fourcc('i', 'p', '3', 'b') /* IPU3 packed 10-bit BGGR bayer */
 #define V4L2_PIX_FMT_IPU3_SGBRG10	v4l2_fourcc('i', 'p', '3', 'g') /* IPU3 packed 10-bit GBRG bayer */
 #define V4L2_PIX_FMT_IPU3_SGRBG10	v4l2_fourcc('i', 'p', '3', 'G') /* IPU3 packed 10-bit GRBG bayer */
 #define V4L2_PIX_FMT_IPU3_SRGGB10	v4l2_fourcc('i', 'p', '3', 'r') /* IPU3 packed 10-bit RGGB bayer */
-
-/* Raspberry Pi PiSP compressed formats. */
-#define V4L2_PIX_FMT_PISP_COMP1_RGGB	v4l2_fourcc('P', 'C', '1', 'R') /* PiSP 8-bit mode 1 compressed RGGB bayer */
-#define V4L2_PIX_FMT_PISP_COMP1_GRBG	v4l2_fourcc('P', 'C', '1', 'G') /* PiSP 8-bit mode 1 compressed GRBG bayer */
-#define V4L2_PIX_FMT_PISP_COMP1_GBRG	v4l2_fourcc('P', 'C', '1', 'g') /* PiSP 8-bit mode 1 compressed GBRG bayer */
-#define V4L2_PIX_FMT_PISP_COMP1_BGGR	v4l2_fourcc('P', 'C', '1', 'B') /* PiSP 8-bit mode 1 compressed BGGR bayer */
-#define V4L2_PIX_FMT_PISP_COMP1_MONO	v4l2_fourcc('P', 'C', '1', 'M') /* PiSP 8-bit mode 1 compressed monochrome */
-#define V4L2_PIX_FMT_PISP_COMP2_RGGB	v4l2_fourcc('P', 'C', '2', 'R') /* PiSP 8-bit mode 2 compressed RGGB bayer */
-#define V4L2_PIX_FMT_PISP_COMP2_GRBG	v4l2_fourcc('P', 'C', '2', 'G') /* PiSP 8-bit mode 2 compressed GRBG bayer */
-#define V4L2_PIX_FMT_PISP_COMP2_GBRG	v4l2_fourcc('P', 'C', '2', 'g') /* PiSP 8-bit mode 2 compressed GBRG bayer */
-#define V4L2_PIX_FMT_PISP_COMP2_BGGR	v4l2_fourcc('P', 'C', '2', 'B') /* PiSP 8-bit mode 2 compressed BGGR bayer */
-#define V4L2_PIX_FMT_PISP_COMP2_MONO	v4l2_fourcc('P', 'C', '2', 'M') /* PiSP 8-bit mode 2 compressed monochrome */
 
 /* SDR formats - used only for Software Defined Radio devices */
 #define V4L2_SDR_FMT_CU8          v4l2_fourcc('C', 'U', '0', '8') /* IQ u8 */
@@ -855,24 +810,6 @@ struct v4l2_pix_format {
 /* Vendor specific - used for RK_ISP1 camera sub-system */
 #define V4L2_META_FMT_RK_ISP1_PARAMS	v4l2_fourcc('R', 'K', '1', 'P') /* Rockchip ISP1 3A Parameters */
 #define V4L2_META_FMT_RK_ISP1_STAT_3A	v4l2_fourcc('R', 'K', '1', 'S') /* Rockchip ISP1 3A Statistics */
-#define V4L2_META_FMT_RK_ISP1_EXT_PARAMS	v4l2_fourcc('R', 'K', '1', 'E') /* Rockchip ISP1 3a Extensible Parameters */
-
-/* Vendor specific - used for RaspberryPi PiSP */
-#define V4L2_META_FMT_RPI_BE_CFG	v4l2_fourcc('R', 'P', 'B', 'C') /* PiSP BE configuration */
-
-#ifdef __KERNEL__
-/*
- * Line-based metadata formats. Remember to update v4l_fill_fmtdesc() when
- * adding new ones!
- */
-#define V4L2_META_FMT_GENERIC_8		v4l2_fourcc('M', 'E', 'T', '8') /* Generic 8-bit metadata */
-#define V4L2_META_FMT_GENERIC_CSI2_10	v4l2_fourcc('M', 'C', '1', 'A') /* 10-bit CSI-2 packed 8-bit metadata */
-#define V4L2_META_FMT_GENERIC_CSI2_12	v4l2_fourcc('M', 'C', '1', 'C') /* 12-bit CSI-2 packed 8-bit metadata */
-#define V4L2_META_FMT_GENERIC_CSI2_14	v4l2_fourcc('M', 'C', '1', 'E') /* 14-bit CSI-2 packed 8-bit metadata */
-#define V4L2_META_FMT_GENERIC_CSI2_16	v4l2_fourcc('M', 'C', '1', 'G') /* 16-bit CSI-2 packed 8-bit metadata */
-#define V4L2_META_FMT_GENERIC_CSI2_20	v4l2_fourcc('M', 'C', '1', 'K') /* 20-bit CSI-2 packed 8-bit metadata */
-#define V4L2_META_FMT_GENERIC_CSI2_24	v4l2_fourcc('M', 'C', '1', 'O') /* 24-bit CSI-2 packed 8-bit metadata */
-#endif
 
 /* priv field value to indicates that subsequent fields are valid. */
 #define V4L2_PIX_FMT_PRIV_MAGIC		0xfeedcafe
@@ -904,7 +841,6 @@ struct v4l2_fmtdesc {
 #define V4L2_FMT_FLAG_CSC_YCBCR_ENC		0x0080
 #define V4L2_FMT_FLAG_CSC_HSV_ENC		V4L2_FMT_FLAG_CSC_YCBCR_ENC
 #define V4L2_FMT_FLAG_CSC_QUANTIZATION		0x0100
-#define V4L2_FMT_FLAG_META_LINE_BASED		0x0200
 
 	/* Frame Size and frame rate enumeration */
 /*
@@ -1034,23 +970,6 @@ struct v4l2_jpegcompression {
  *	M E M O R Y - M A P P I N G   B U F F E R S
  */
 
-#ifdef __KERNEL__
-/*
- * This corresponds to the user space version of timeval
- * for 64-bit time_t. sparc64 is different from everyone
- * else, using the microseconds in the wrong half of the
- * second 64-bit word.
- */
-struct __kernel_v4l2_timeval {
-	long long	tv_sec;
-#if defined(__sparc__) && defined(__arch64__)
-	int		tv_usec;
-	int		__pad;
-#else
-	long long	tv_usec;
-#endif
-};
-#endif
 
 struct v4l2_requestbuffers {
 	__u32			count;
@@ -1071,20 +990,18 @@ struct v4l2_requestbuffers {
 #define V4L2_BUF_CAP_SUPPORTS_ORPHANED_BUFS		(1 << 4)
 #define V4L2_BUF_CAP_SUPPORTS_M2M_HOLD_CAPTURE_BUF	(1 << 5)
 #define V4L2_BUF_CAP_SUPPORTS_MMAP_CACHE_HINTS		(1 << 6)
-#define V4L2_BUF_CAP_SUPPORTS_MAX_NUM_BUFFERS		(1 << 7)
-#define V4L2_BUF_CAP_SUPPORTS_REMOVE_BUFS		(1 << 8)
 
 /**
  * struct v4l2_plane - plane info for multi-planar buffers
  * @bytesused:		number of bytes occupied by data in the plane (payload)
  * @length:		size of this plane (NOT the payload) in bytes
- * @m.mem_offset:	when memory in the associated struct v4l2_buffer is
+ * @mem_offset:		when memory in the associated struct v4l2_buffer is
  *			V4L2_MEMORY_MMAP, equals the offset from the start of
  *			the device memory for this plane (or is a "cookie" that
  *			should be passed to mmap() called on the video node)
- * @m.userptr:		when memory is V4L2_MEMORY_USERPTR, a userspace pointer
+ * @userptr:		when memory is V4L2_MEMORY_USERPTR, a userspace pointer
  *			pointing to this plane
- * @m.fd:		when memory is V4L2_MEMORY_DMABUF, a userspace file
+ * @fd:			when memory is V4L2_MEMORY_DMABUF, a userspace file
  *			descriptor associated with this plane
  * @m:			union of @mem_offset, @userptr and @fd
  * @data_offset:	offset in the plane to the start of data; usually 0,
@@ -1122,14 +1039,14 @@ struct v4l2_plane {
  * @sequence:	sequence count of this frame
  * @memory:	enum v4l2_memory; the method, in which the actual video data is
  *		passed
- * @m.offset:	for non-multiplanar buffers with memory == V4L2_MEMORY_MMAP;
+ * @offset:	for non-multiplanar buffers with memory == V4L2_MEMORY_MMAP;
  *		offset from the start of the device memory for this plane,
  *		(or a "cookie" that should be passed to mmap() as offset)
- * @m.userptr:	for non-multiplanar buffers with memory == V4L2_MEMORY_USERPTR;
+ * @userptr:	for non-multiplanar buffers with memory == V4L2_MEMORY_USERPTR;
  *		a userspace pointer pointing to this buffer
- * @m.fd:		for non-multiplanar buffers with memory == V4L2_MEMORY_DMABUF;
+ * @fd:		for non-multiplanar buffers with memory == V4L2_MEMORY_DMABUF;
  *		a userspace file descriptor associated with this buffer
- * @m.planes:	for multiplanar buffers; userspace pointer to the array of plane
+ * @planes:	for multiplanar buffers; userspace pointer to the array of plane
  *		info structs for this buffer
  * @m:		union of @offset, @userptr, @planes and @fd
  * @length:	size in bytes of the buffer (NOT its payload) for single-plane
@@ -1149,11 +1066,7 @@ struct v4l2_buffer {
 	__u32			bytesused;
 	__u32			flags;
 	__u32			field;
-#ifdef __KERNEL__
-	struct __kernel_v4l2_timeval timestamp;
-#else
 	struct timeval		timestamp;
-#endif
 	struct v4l2_timecode	timecode;
 	__u32			sequence;
 
@@ -1173,7 +1086,6 @@ struct v4l2_buffer {
 	};
 };
 
-#ifndef __KERNEL__
 /**
  * v4l2_timeval_to_ns - Convert timeval to nanoseconds
  * @tv:		pointer to the timeval variable to be converted
@@ -1181,11 +1093,10 @@ struct v4l2_buffer {
  * Returns the scalar nanosecond representation of the timeval
  * parameter.
  */
-static inline __u64 v4l2_timeval_to_ns(const struct timeval *tv)
+static __inline__ __u64 v4l2_timeval_to_ns(const struct timeval *tv)
 {
 	return (__u64)tv->tv_sec * 1000000000ULL + tv->tv_usec * 1000;
 }
-#endif
 
 /*  Flags for 'flags' field */
 /* Buffer is mapped (flag) */
@@ -1278,10 +1189,8 @@ struct v4l2_framebuffer {
 /*  Flags for the 'capability' field. Read only */
 #define V4L2_FBUF_CAP_EXTERNOVERLAY	0x0001
 #define V4L2_FBUF_CAP_CHROMAKEY		0x0002
-#ifndef __KERNEL__
 #define V4L2_FBUF_CAP_LIST_CLIPPING     0x0004
 #define V4L2_FBUF_CAP_BITMAP_CLIPPING	0x0008
-#endif
 #define V4L2_FBUF_CAP_LOCAL_ALPHA	0x0010
 #define V4L2_FBUF_CAP_GLOBAL_ALPHA	0x0020
 #define V4L2_FBUF_CAP_LOCAL_INV_ALPHA	0x0040
@@ -1297,7 +1206,7 @@ struct v4l2_framebuffer {
 
 struct v4l2_clip {
 	struct v4l2_rect        c;
-	struct v4l2_clip	__user *next;
+	struct v4l2_clip	*next;
 };
 
 struct v4l2_window {
@@ -1306,7 +1215,7 @@ struct v4l2_window {
 	__u32			chromakey;
 	struct v4l2_clip	*clips;
 	__u32			clipcount;
-	void			__user *bitmap;
+	void			*bitmap;
 	__u8                    global_alpha;
 };
 
@@ -1846,46 +1755,42 @@ struct v4l2_ext_control {
 	union {
 		__s32 value;
 		__s64 value64;
-		char __user *string;
-		__u8 __user *p_u8;
-		__u16 __user *p_u16;
-		__u32 __user *p_u32;
-		__s32 __user *p_s32;
-		__s64 __user *p_s64;
-		struct v4l2_area __user *p_area;
-		struct v4l2_ctrl_h264_sps __user *p_h264_sps;
-		struct v4l2_ctrl_h264_pps __user *p_h264_pps;
-		struct v4l2_ctrl_h264_scaling_matrix __user *p_h264_scaling_matrix;
-		struct v4l2_ctrl_h264_pred_weights __user *p_h264_pred_weights;
-		struct v4l2_ctrl_h264_slice_params __user *p_h264_slice_params;
-		struct v4l2_ctrl_h264_decode_params __user *p_h264_decode_params;
-		struct v4l2_ctrl_fwht_params __user *p_fwht_params;
-		struct v4l2_ctrl_vp8_frame __user *p_vp8_frame;
-		struct v4l2_ctrl_mpeg2_sequence __user *p_mpeg2_sequence;
-		struct v4l2_ctrl_mpeg2_picture __user *p_mpeg2_picture;
-		struct v4l2_ctrl_mpeg2_quantisation __user *p_mpeg2_quantisation;
-		struct v4l2_ctrl_vp9_compressed_hdr __user *p_vp9_compressed_hdr_probs;
-		struct v4l2_ctrl_vp9_frame __user *p_vp9_frame;
-		struct v4l2_ctrl_hevc_sps __user *p_hevc_sps;
-		struct v4l2_ctrl_hevc_pps __user *p_hevc_pps;
-		struct v4l2_ctrl_hevc_slice_params __user *p_hevc_slice_params;
-		struct v4l2_ctrl_hevc_scaling_matrix __user *p_hevc_scaling_matrix;
-		struct v4l2_ctrl_hevc_decode_params __user *p_hevc_decode_params;
-		struct v4l2_ctrl_av1_sequence __user *p_av1_sequence;
-		struct v4l2_ctrl_av1_tile_group_entry __user *p_av1_tile_group_entry;
-		struct v4l2_ctrl_av1_frame __user *p_av1_frame;
-		struct v4l2_ctrl_av1_film_grain __user *p_av1_film_grain;
-		struct v4l2_ctrl_hdr10_cll_info __user *p_hdr10_cll_info;
-		struct v4l2_ctrl_hdr10_mastering_display __user *p_hdr10_mastering_display;
-		void __user *ptr;
-	} __attribute__ ((packed));
+		char *string;
+		__u8 *p_u8;
+		__u16 *p_u16;
+		__u32 *p_u32;
+		__s32 *p_s32;
+		__s64 *p_s64;
+		struct v4l2_area *p_area;
+		struct v4l2_ctrl_h264_sps *p_h264_sps;
+		struct v4l2_ctrl_h264_pps *p_h264_pps;
+		struct v4l2_ctrl_h264_scaling_matrix *p_h264_scaling_matrix;
+		struct v4l2_ctrl_h264_pred_weights *p_h264_pred_weights;
+		struct v4l2_ctrl_h264_slice_params *p_h264_slice_params;
+		struct v4l2_ctrl_h264_decode_params *p_h264_decode_params;
+		struct v4l2_ctrl_fwht_params *p_fwht_params;
+		struct v4l2_ctrl_vp8_frame *p_vp8_frame;
+		struct v4l2_ctrl_mpeg2_sequence *p_mpeg2_sequence;
+		struct v4l2_ctrl_mpeg2_picture *p_mpeg2_picture;
+		struct v4l2_ctrl_mpeg2_quantisation *p_mpeg2_quantisation;
+		struct v4l2_ctrl_vp9_compressed_hdr *p_vp9_compressed_hdr_probs;
+		struct v4l2_ctrl_vp9_frame *p_vp9_frame;
+		struct v4l2_ctrl_hevc_sps *p_hevc_sps;
+		struct v4l2_ctrl_hevc_pps *p_hevc_pps;
+		struct v4l2_ctrl_hevc_slice_params *p_hevc_slice_params;
+		struct v4l2_ctrl_hevc_scaling_matrix *p_hevc_scaling_matrix;
+		struct v4l2_ctrl_hevc_decode_params *p_hevc_decode_params;
+		struct v4l2_ctrl_av1_sequence *p_av1_sequence;
+		struct v4l2_ctrl_av1_tile_group_entry *p_av1_tile_group_entry;
+		struct v4l2_ctrl_av1_frame *p_av1_frame;
+		struct v4l2_ctrl_av1_film_grain *p_av1_film_grain;
+		void *ptr;
+	};
 } __attribute__ ((packed));
 
 struct v4l2_ext_controls {
 	union {
-#ifndef __KERNEL__
 		__u32 ctrl_class;
-#endif
 		__u32 which;
 	};
 	__u32 count;
@@ -1896,9 +1801,7 @@ struct v4l2_ext_controls {
 };
 
 #define V4L2_CTRL_ID_MASK	  (0x0fffffff)
-#ifndef __KERNEL__
 #define V4L2_CTRL_ID2CLASS(id)    ((id) & 0x0fff0000UL)
-#endif
 #define V4L2_CTRL_ID2WHICH(id)    ((id) & 0x0fff0000UL)
 #define V4L2_CTRL_DRIVER_PRIV(id) (((id) & 0xffff) >= 0x1000)
 #define V4L2_CTRL_MAX_DIMS	  (4)
@@ -2452,32 +2355,23 @@ struct v4l2_sdr_format {
  * struct v4l2_meta_format - metadata format definition
  * @dataformat:		little endian four character code (fourcc)
  * @buffersize:		maximum size in bytes required for data
- * @width:		number of data units of data per line (valid for line
- *			based formats only, see format documentation)
- * @height:		number of lines of data per buffer (valid for line based
- *			formats only)
- * @bytesperline:	offset between the beginnings of two adjacent lines in
- *			bytes (valid for line based formats only)
  */
 struct v4l2_meta_format {
 	__u32				dataformat;
 	__u32				buffersize;
-	__u32				width;
-	__u32				height;
-	__u32				bytesperline;
 } __attribute__ ((packed));
 
 /**
  * struct v4l2_format - stream data format
- * @type:		enum v4l2_buf_type; type of the data stream
- * @fmt.pix:		definition of an image format
- * @fmt.pix_mp:		definition of a multiplanar image format
- * @fmt.win:		definition of an overlaid image
- * @fmt.vbi:		raw VBI capture or output parameters
- * @fmt.sliced:		sliced VBI capture or output parameters
- * @fmt.raw_data:	placeholder for future extensions and custom formats
- * @fmt:		union of @pix, @pix_mp, @win, @vbi, @sliced, @sdr,
- *			@meta and @raw_data
+ * @type:	enum v4l2_buf_type; type of the data stream
+ * @pix:	definition of an image format
+ * @pix_mp:	definition of a multiplanar image format
+ * @win:	definition of an overlaid image
+ * @vbi:	raw VBI capture or output parameters
+ * @sliced:	sliced VBI capture or output parameters
+ * @raw_data:	placeholder for future extensions and custom formats
+ * @fmt:	union of @pix, @pix_mp, @win, @vbi, @sliced, @sdr, @meta
+ *		and @raw_data
  */
 struct v4l2_format {
 	__u32	 type;
@@ -2580,11 +2474,7 @@ struct v4l2_event {
 	} u;
 	__u32				pending;
 	__u32				sequence;
-#ifdef __KERNEL__
-	struct __kernel_timespec	timestamp;
-#else
 	struct timespec			timestamp;
-#endif
 	__u32				id;
 	__u32				reserved[8];
 };
@@ -2654,9 +2544,6 @@ struct v4l2_dbg_chip_info {
  * @flags:	additional buffer management attributes (ignored unless the
  *		queue has V4L2_BUF_CAP_SUPPORTS_MMAP_CACHE_HINTS capability
  *		and configured for MMAP streaming I/O).
- * @max_num_buffers: if V4L2_BUF_CAP_SUPPORTS_MAX_NUM_BUFFERS capability flag is set
- *		this field indicate the maximum possible number of buffers
- *		for this queue.
  * @reserved:	future extensions
  */
 struct v4l2_create_buffers {
@@ -2666,22 +2553,7 @@ struct v4l2_create_buffers {
 	struct v4l2_format	format;
 	__u32			capabilities;
 	__u32			flags;
-	__u32			max_num_buffers;
-	__u32			reserved[5];
-};
-
-/**
- * struct v4l2_remove_buffers - VIDIOC_REMOVE_BUFS argument
- * @index:	the first buffer to be removed
- * @count:	number of buffers to removed
- * @type:	enum v4l2_buf_type
- * @reserved:	future extensions
- */
-struct v4l2_remove_buffers {
-	__u32			index;
-	__u32			count;
-	__u32			type;
-	__u32			reserved[13];
+	__u32			reserved[6];
 };
 
 /*
@@ -2783,8 +2655,6 @@ struct v4l2_remove_buffers {
 #define VIDIOC_DBG_G_CHIP_INFO  _IOWR('V', 102, struct v4l2_dbg_chip_info)
 
 #define VIDIOC_QUERY_EXT_CTRL	_IOWR('V', 103, struct v4l2_query_ext_ctrl)
-#define VIDIOC_REMOVE_BUFS	_IOWR('V', 104, struct v4l2_remove_buffers)
-
 
 /* Reminder: when adding new ioctls please add support for them to
    drivers/media/v4l2-core/v4l2-compat-ioctl32.c as well! */
@@ -2792,7 +2662,6 @@ struct v4l2_remove_buffers {
 #define BASE_VIDIOC_PRIVATE	192		/* 192-255 are private */
 
 /* Deprecated definitions kept for backwards compatibility */
-#ifndef __KERNEL__
 #define V4L2_PIX_FMT_HM12 V4L2_PIX_FMT_NV12_16L16
 #define V4L2_PIX_FMT_SUNXI_TILED_NV12 V4L2_PIX_FMT_NV12_32L32
 /*
@@ -2800,6 +2669,5 @@ struct v4l2_remove_buffers {
  * from their code.
  */
 #define V4L2_CAP_ASYNCIO 0x02000000
-#endif
 
-#endif /* _UAPI__LINUX_VIDEODEV2_H */
+#endif /* __LINUX_VIDEODEV2_H */

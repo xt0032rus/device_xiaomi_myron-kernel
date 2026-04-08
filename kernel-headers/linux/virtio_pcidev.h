@@ -3,8 +3,8 @@
  * Copyright (C) 2021 Intel Corporation
  * Author: Johannes Berg <johannes@sipsolutions.net>
  */
-#ifndef _UAPI_LINUX_VIRTIO_PCIDEV_H
-#define _UAPI_LINUX_VIRTIO_PCIDEV_H
+#ifndef _LINUX_VIRTIO_PCIDEV_H
+#define _LINUX_VIRTIO_PCIDEV_H
 #include <linux/types.h>
 
 /**
@@ -62,4 +62,4 @@ struct virtio_pcidev_msg {
 	__u8 data[];
 };
 
-#endif /* _UAPI_LINUX_VIRTIO_PCIDEV_H */
+#endif /* _LINUX_VIRTIO_PCIDEV_H */

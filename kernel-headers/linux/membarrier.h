@@ -1,5 +1,5 @@
-#ifndef _UAPI_LINUX_MEMBARRIER_H
-#define _UAPI_LINUX_MEMBARRIER_H
+#ifndef _LINUX_MEMBARRIER_H
+#define _LINUX_MEMBARRIER_H
 
 /*
  * linux/membarrier.h
@@ -166,4 +166,4 @@ enum membarrier_cmd_flag {
 	MEMBARRIER_CMD_FLAG_CPU		= (1 << 0),
 };
 
-#endif /* _UAPI_LINUX_MEMBARRIER_H */
+#endif /* _LINUX_MEMBARRIER_H */

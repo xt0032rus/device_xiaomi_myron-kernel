@@ -4,8 +4,8 @@
  * Copyright (c) 2011-2014, Intel Corporation.
  */
 
-#ifndef _UAPI_LINUX_NVME_IOCTL_H
-#define _UAPI_LINUX_NVME_IOCTL_H
+#ifndef _LINUX_NVME_IOCTL_H
+#define _LINUX_NVME_IOCTL_H
 
 #include <linux/types.h>
 
@@ -111,4 +111,4 @@ struct nvme_uring_cmd {
 #define NVME_URING_CMD_ADMIN	_IOWR('N', 0x82, struct nvme_uring_cmd)
 #define NVME_URING_CMD_ADMIN_VEC _IOWR('N', 0x83, struct nvme_uring_cmd)
 
-#endif /* _UAPI_LINUX_NVME_IOCTL_H */
+#endif /* _LINUX_NVME_IOCTL_H */

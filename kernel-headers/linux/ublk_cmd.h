@@ -49,8 +49,6 @@
 	_IOR('u', UBLK_CMD_GET_DEV_INFO2, struct ublksrv_ctrl_cmd)
 #define UBLK_U_CMD_GET_FEATURES	\
 	_IOR('u', 0x13, struct ublksrv_ctrl_cmd)
-#define UBLK_U_CMD_DEL_DEV_ASYNC	\
-	_IOR('u', 0x14, struct ublksrv_ctrl_cmd)
 
 /*
  * 64bits are enough now, and it should be easy to extend in case of
@@ -208,7 +206,7 @@ struct ublksrv_ctrl_cmd {
 	__u16	len;
 	__u64	addr;
 
-	/* inline data */
+	/* __inline__ data */
 	__u64	data[1];
 
 	/*
@@ -299,12 +297,12 @@ struct ublksrv_io_desc {
 	__u64		addr;
 };
 
-static inline __u8 ublksrv_get_op(const struct ublksrv_io_desc *iod)
+static __inline__ __u8 ublksrv_get_op(const struct ublksrv_io_desc *iod)
 {
 	return iod->op_flags & 0xff;
 }
 
-static inline __u32 ublksrv_get_flags(const struct ublksrv_io_desc *iod)
+static __inline__ __u32 ublksrv_get_flags(const struct ublksrv_io_desc *iod)
 {
 	return iod->op_flags >> 8;
 }
